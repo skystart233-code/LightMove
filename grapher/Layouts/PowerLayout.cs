@@ -5,7 +5,7 @@
         public PowerLayout()
             : base()
         {
-            Name = "Power";
+            Name = "幂函数 Power";
             Mode = AccelMode.power;
             LogarithmicCharts = false;
 

@@ -7,7 +7,7 @@ namespace grapher.Layouts
         public JumpLayout()
             : base()
         {
-            Name = "Jump";
+            Name = "跃变 Jump";
             Mode = AccelMode.jump;
             LogarithmicCharts = false;
 

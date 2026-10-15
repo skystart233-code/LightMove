@@ -14,9 +14,9 @@ namespace grapher
         public AboutBox(Version driver)
         {
             InitializeComponent();
-            this.Text = String.Format("About {0}", AssemblyTitle);
-            this.labelVersion.Text = String.Format("GUI Version {0}", AssemblyVersion);
-            this.labelDriverVersion.Text = String.Format("Driver Version {0}", driver.ToString());
+            this.Text = String.Format("关于 {0}", AssemblyTitle);
+            this.labelVersion.Text = String.Format("界面版本 {0}", AssemblyVersion);
+            this.labelDriverVersion.Text = String.Format("驱动版本 {0}", driver.ToString());
         }
 
         #region Assembly Attribute Accessors

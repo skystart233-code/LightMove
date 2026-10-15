@@ -28,7 +28,7 @@ namespace grapher.Models.Options.Cap
         {
             public CapType Type { get; set; }
 
-            public string Name => Type.ToString();
+            public string Name => Type == CapType.Input ? "输入" : Type == CapType.Output ? "输出" : "双重";
 
             public override string ToString() => Name;
         }

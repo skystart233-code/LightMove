@@ -148,7 +148,7 @@ namespace grapher.Models.Options.LUT
         {
             if (string.IsNullOrWhiteSpace(userText))
             {
-                throw new ApplicationException("Text must be entered in text box to fill Look Up Table.");
+                throw new ApplicationException("请在文本框中输入查找表坐标。");
             }
 
             Vec2<float>[] points = new Vec2<float>[AccelArgs.MaxLutPoints];
@@ -161,12 +161,12 @@ namespace grapher.Models.Options.LUT
 
             if (pointsCount < 2)
             {
-                throw new ApplicationException("At least 2 points required");
+                throw new ApplicationException("至少需要 2 个坐标点");
             }
 
             if (pointsCount > AccelArgs.MaxLutPoints)
             {
-                throw new ApplicationException($"Number of points exceeds max ({AccelArgs.MaxLutPoints})");
+                throw new ApplicationException($"坐标点数量超过上限（{AccelArgs.MaxLutPoints}）");
             }
 
             foreach(var pointEntry in userTextSplit)
@@ -175,7 +175,7 @@ namespace grapher.Models.Options.LUT
 
                 if (pointSplit.Length != 2)
                 {
-                    throw new ApplicationException($"Point at index {index} is malformed. Expected format: x,y; Given: {pointEntry.Trim()}");
+                    throw new ApplicationException($"第 {index} 个点格式无效。应为 x,y；当前为：{pointEntry.Trim()}");
                 }
 
                 float x;
@@ -187,17 +187,17 @@ namespace grapher.Models.Options.LUT
                 }
                 catch (Exception ex)
                 {
-                    throw new ApplicationException($"X-value for point at index {index} is malformed. Expected: float. Given: {pointSplit[0]}", ex);
+                    throw new ApplicationException($"第 {index} 个点的 X 值必须是数字。当前为：{pointSplit[0]}", ex);
                 }
 
                 if (x <= 0)
                 {
-                    throw new ApplicationException($"X-value for point at index {index} is less than or equal to 0. Point (0,0) is implied and should not be specified in points text.");
+                    throw new ApplicationException($"第 {index} 个点的 X 值必须大于 0。原点 (0,0) 已隐含，无需填写。");
                 }
 
                 if (x <= lastX)
                 {
-                    throw new ApplicationException($"X-value for point at index {index} is less than or equal to previous x-value. Value: {x} Previous: {lastX}");
+                    throw new ApplicationException($"第 {index} 个点的 X 值必须大于前一个点。当前值：{x}，前值：{lastX}");
                 }
 
                 lastX = x;
@@ -208,12 +208,12 @@ namespace grapher.Models.Options.LUT
                 }
                 catch (Exception ex)
                 {
-                    throw new ApplicationException($"Y-value for point at index {index} is malformed. Expected: float. Given: {pointSplit[1]}", ex);
+                    throw new ApplicationException($"第 {index} 个点的 Y 值必须是数字。当前为：{pointSplit[1]}", ex);
                 }
 
                 if (y <= 0)
                 {
-                    throw new ApplicationException($"Y-value for point at index {index} is less than or equal to 0. Value: {y}");
+                    throw new ApplicationException($"第 {index} 个点的 Y 值必须大于 0。当前为：{y}");
                 }
 
                 points[index] = new Vec2<float> { x = x, y = y };

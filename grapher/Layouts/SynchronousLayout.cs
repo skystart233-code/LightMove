@@ -12,7 +12,7 @@ namespace grapher.Layouts
          public SynchronousLayout()
             : base()
         {
-            Name = "Synchronous";
+            Name = "同步 Synchronous";
             Mode = AccelMode.synchronous;
             LogarithmicCharts = true;
 

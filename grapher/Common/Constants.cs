@@ -91,31 +91,31 @@ namespace grapher.Common
         public const string GainCapFormatString = "0.##";
 
         /// <summary> Format string for shortened x and y dropdowns. </summary>
-        public const string AccelDropDownDefaultFullText = "Acceleration Type";
+        public const string AccelDropDownDefaultFullText = "加速类型";
 
         /// <summary> Format string for default dropdowns. </summary>
-        public const string AccelDropDownDefaultShortText = "Accel Type";
+        public const string AccelDropDownDefaultShortText = "加速类型";
 
         /// <summary> Default text to be displayed on write button. </summary>
-        public const string WriteButtonDefaultText = "Apply";
+        public const string WriteButtonDefaultText = "应用";
 
         /// <summary> Default text to be displayed on toggle button. </summary>
-        public const string ToggleButtonDefaultText = "Toggle";
+        public const string ToggleButtonDefaultText = "切换";
 
         /// <summary> Default text to be displayed on button delay. </summary>
-        public const string ButtonDelayText = "Delay";
+        public const string ButtonDelayText = "等待";
         
         /// <summary> Default text to be displayed on button delay. </summary>
-        public const string ResetButtonText = "Reset";
+        public const string ResetButtonText = "重置";
         
         /// <summary> Title of sensitivity chart. </summary>
-        public const string SensitivityChartTitle = "Sensitivity";
+        public const string SensitivityChartTitle = "灵敏度";
 
         /// <summary> Title of velocity chart. </summary>
-        public const string VelocityChartTitle = "Velocity";
+        public const string VelocityChartTitle = "速度";
 
         /// <summary> Title of gain chart. </summary>
-        public const string GainChartTitle = "Gain";
+        public const string GainChartTitle = "增益";
 
         /// <summary> Text for x component. </summary>
         public const string XComponent = "X";
@@ -129,10 +129,10 @@ namespace grapher.Common
         public const string GuiConfigFileName = ".config";
 
         /// <summary> Text to directionality panel title when panel is closed. </summary>
-        public const string DirectionalityTitleClosed = "Anisotropy \u25BC";
+        public const string DirectionalityTitleClosed = "各向异性 \u25BC";
 
         /// <summary> Text to directionality panel title when panel is open. </summary>
-        public const string DirectionalityTitleOpen = "Anisotropy \u25B2";
+        public const string DirectionalityTitleOpen = "各向异性 \u25B2";
 
         /// <summary> Style used by System.Double.Parse </summary>
         public const NumberStyles FloatStyle = NumberStyles.Float | NumberStyles.AllowThousands;
@@ -153,7 +153,7 @@ namespace grapher.Common
         #region ReadOnly
 
         /// <summary> Default last mouse move label text format. </summary>
-        public static readonly string MouseMoveDefaultFormat = "Last (x, y): ({0}, {1})";
+        public static readonly string MouseMoveDefaultFormat = "最近移动 (x, y)：({0}, {1})";
 
         /// <summary> Last mouse move label text format when last input was from a dpi normalized device. </summary>
         public static readonly string MouseMoveNormalizedFormat = $"{MouseMoveDefaultFormat} (n)";

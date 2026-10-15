@@ -7,7 +7,7 @@ namespace grapher.Layouts
         public OffLayout()
             : base()
         {
-            Name = "Off";
+            Name = "关闭 Off";
             Mode = AccelMode.noaccel;
             LogarithmicCharts = false;
 

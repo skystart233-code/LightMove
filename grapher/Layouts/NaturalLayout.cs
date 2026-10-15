@@ -7,7 +7,7 @@ namespace grapher.Layouts
         public NaturalLayout()
             : base()
         {
-            Name = "Natural";
+            Name = "自然 Natural";
             Mode = AccelMode.natural;
             LogarithmicCharts = false;
 

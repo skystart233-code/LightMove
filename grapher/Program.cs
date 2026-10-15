@@ -16,12 +16,12 @@ namespace grapher
 
             if (!result)
             {
-                MessageBox.Show("Another instance of the Raw Accel Grapher is already running.");
+                MessageBox.Show("Raw Accel 已在运行，请先关闭现有窗口。");
                 return;
             }
 
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.GetCultureInfo("zh-CN");
 
             AppDomain.CurrentDomain.UnhandledException += GlobalUnhandledExceptionHandler;
 
@@ -36,7 +36,7 @@ namespace grapher
         {
             var ex = (Exception)e.ExceptionObject;
             System.IO.File.WriteAllText("error.log", ex.ToString());
-            MessageBox.Show(ex.Message, "Error");
+            MessageBox.Show(Common.Chinese.ErrorMessage(ex.Message), "错误");
         }
     }
 }

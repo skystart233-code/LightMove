@@ -235,7 +235,7 @@ namespace grapher.Models
                 sensitivityLabel,
                 0,
                 new ActiveValueLabel(sensitivityActiveLabel, activeValueTitleX),
-                "Sens Multiplier");
+                "灵敏度倍率");
 
             var yxRatio = new LockableOption(
                 new Option(
@@ -245,7 +245,7 @@ namespace grapher.Models
                     yxRatioLabel,
                     0,
                     new ActiveValueLabel(yxRatioActiveLabel, activeValueTitleX),
-                    "Y/X Ratio"),
+                    "纵横比"),
                 sensXYLock,
                 1);
 
@@ -256,7 +256,7 @@ namespace grapher.Models
                 rotationLabel,
                 0,
                 new ActiveValueLabel(rotationActiveLabel, activeValueTitleX),
-                "Rotation");
+                "旋转角度");
 
             var optionSetYLeft = activeValueTitleX.Left + activeValueTitleX.Width;
 
@@ -269,7 +269,7 @@ namespace grapher.Models
                 inputJumpLabelX,
                 0,
                 new ActiveValueLabel(inputJumpActiveLabelX, activeValueTitleX),
-                "Jump");
+                "跃变");
 
             var inputJumpY = new Option(
                 inputJumpBoxY,
@@ -278,7 +278,7 @@ namespace grapher.Models
                 inputJumpLabelY,
                 optionSetYLeft,
                 new ActiveValueLabel(inputJumpActiveLabelY, activeValueTitleY),
-                "Jump");
+                "跃变");
 
             var outputJumpX = new Option(
                 outputJumpBoxX,
@@ -287,7 +287,7 @@ namespace grapher.Models
                 outputJumpLabelX,
                 0,
                 new ActiveValueLabel(outputJumpActiveLabelX, activeValueTitleX),
-                "Jump");
+                "跃变");
 
             var outputJumpY = new Option(
                 outputJumpBoxY,
@@ -296,7 +296,7 @@ namespace grapher.Models
                 outputJumpLabelY,
                 optionSetYLeft,
                 new ActiveValueLabel(outputJumpActiveLabelY, activeValueTitleY),
-                "Jump");
+                "跃变");
 
             var inputOffsetX = new Option(
                 inputOffsetBoxX,
@@ -305,7 +305,7 @@ namespace grapher.Models
                 inputOffsetLabelX,
                 0,
                 new ActiveValueLabel(inputOffsetActiveLabelX, activeValueTitleX),
-                "Offset");
+                "阈值");
 
             var inputOffsetY = new Option(
                 inputOffsetBoxY,
@@ -314,7 +314,7 @@ namespace grapher.Models
                 inputOffsetLabelY,
                 optionSetYLeft,
                 new ActiveValueLabel(inputOffsetActiveLabelY, activeValueTitleY),
-                "Offset");
+                "阈值");
 
             var outputOffsetX = new Option(
                 outputOffsetBoxX,
@@ -323,7 +323,7 @@ namespace grapher.Models
                 outputOffsetLabelX,
                 0,
                 new ActiveValueLabel(outputOffsetActiveLabelX, activeValueTitleX),
-                "Offset");
+                "阈值");
 
             var outputOffsetY = new Option(
                 outputOffsetBoxY,
@@ -332,7 +332,7 @@ namespace grapher.Models
                 outputOffsetLabelY,
                 optionSetYLeft,
                 new ActiveValueLabel(outputOffsetActiveLabelY, activeValueTitleY),
-                "Offset");
+                "阈值");
 
             var accelerationX = new Option(
                 new Field(accelerationBoxX, form, 0),
@@ -449,7 +449,7 @@ namespace grapher.Models
                 inCapLabelXClassic,
                 0,
                 new ActiveValueLabel(inCapActiveXLabelClassic, activeValueTitleX),
-                "Cap: Input");
+                "输入上限");
 
             var inCapYClassic = new Option(
                 inCapBoxYClassic,
@@ -458,7 +458,7 @@ namespace grapher.Models
                 inCapLabelYClassic,
                 optionSetYLeft,
                 new ActiveValueLabel(inCapActiveYLabelClassic, activeValueTitleY),
-                "Cap");
+                "上限");
 
             var outCapXClassic = new Option(
                 outCapBoxXClassic,
@@ -467,7 +467,7 @@ namespace grapher.Models
                 outCapLabelXClassic,
                 0,
                 new ActiveValueLabel(outCapActiveXLabelClassic, activeValueTitleX),
-                "Cap: Input");
+                "输入上限");
 
             var outCapYClassic = new Option(
                 outCapBoxYClassic,
@@ -476,7 +476,7 @@ namespace grapher.Models
                 outCapLabelYClassic,
                 optionSetYLeft,
                 new ActiveValueLabel(outCapActiveYLabelClassic, activeValueTitleY),
-                "Cap");
+                "上限");
 
             var capTypeXClassic = new CapTypeOptions(
                 capTypeLabelXClassic,
@@ -509,7 +509,7 @@ namespace grapher.Models
                 inCapLabelXPower,
                 0,
                 new ActiveValueLabel(inCapActiveXLabelPower, activeValueTitleX),
-                "Cap: Input");
+                "输入上限");
 
             var inCapYPower = new Option(
                 inCapBoxYPower,
@@ -518,7 +518,7 @@ namespace grapher.Models
                 inCapLabelYPower,
                 optionSetYLeft,
                 new ActiveValueLabel(inCapActiveYLabelPower, activeValueTitleY),
-                "Cap");
+                "上限");
 
             var outCapXPower = new Option(
                 outCapBoxXPower,
@@ -527,7 +527,7 @@ namespace grapher.Models
                 outCapLabelXPower,
                 0,
                 new ActiveValueLabel(outCapActiveXLabelPower, activeValueTitleX),
-                "Cap: Input");
+                "输入上限");
 
             var outCapYPower = new Option(
                 outCapBoxYPower,
@@ -536,7 +536,7 @@ namespace grapher.Models
                 outCapLabelYPower,
                 optionSetYLeft,
                 new ActiveValueLabel(outCapActiveYLabelPower, activeValueTitleY),
-                "Cap");
+                "上限");
 
             var capTypeXPower = new CapTypeOptions(
                 capTypeLabelXPower,

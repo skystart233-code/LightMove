@@ -8,8 +8,8 @@ namespace grapher.Models.Options.Cap
     {
         #region Constants
 
-        public const string InCapLabel = "Cap: Input";
-        public const string OutCapLabel = "Cap: Output";
+        public const string InCapLabel = "输入上限";
+        public const string OutCapLabel = "输出上限";
 
         #endregion Constants
 

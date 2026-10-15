@@ -25,7 +25,7 @@ namespace grapher.Models.Options.LUT
         {
             public LutApplyType Type { get; set; }
 
-            public string Name => Type.ToString();
+            public string Name => Type == LutApplyType.Sensitivity ? "灵敏度" : "速度";
 
             public override string ToString() => Name;
         }

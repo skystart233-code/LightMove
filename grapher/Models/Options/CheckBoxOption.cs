@@ -105,7 +105,7 @@ namespace grapher.Models.Options
         public void SetActiveValue(bool gain)
         {
             CheckBox.Checked = gain;
-            var activeValueString = gain ? "Gain" : "Legacy";
+            var activeValueString = gain ? "增益" : "传统";
             ActiveValueLabel.SetValue(activeValueString);
         }
     }

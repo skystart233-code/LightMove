@@ -488,7 +488,7 @@ namespace grapher
             this.CapTypeActiveYLabelPower.Name = "CapTypeActiveYLabelPower";
             this.CapTypeActiveYLabelPower.Size = new System.Drawing.Size(16, 13);
             this.CapTypeActiveYLabelPower.TabIndex = 220;
-            this.CapTypeActiveYLabelPower.Text = "In";
+            this.CapTypeActiveYLabelPower.Text = "输入";
             // 
             // CapTypeActiveXLabelPower
             // 
@@ -497,7 +497,7 @@ namespace grapher
             this.CapTypeActiveXLabelPower.Name = "CapTypeActiveXLabelPower";
             this.CapTypeActiveXLabelPower.Size = new System.Drawing.Size(16, 13);
             this.CapTypeActiveXLabelPower.TabIndex = 219;
-            this.CapTypeActiveXLabelPower.Text = "In";
+            this.CapTypeActiveXLabelPower.Text = "输入";
             // 
             // outCapLabelYPower
             // 
@@ -506,7 +506,7 @@ namespace grapher
             this.outCapLabelYPower.Name = "outCapLabelYPower";
             this.outCapLabelYPower.Size = new System.Drawing.Size(64, 13);
             this.outCapLabelYPower.TabIndex = 218;
-            this.outCapLabelYPower.Text = "Cap: Output";
+            this.outCapLabelYPower.Text = "输出上限";
             // 
             // inCapLabelYPower
             // 
@@ -515,7 +515,7 @@ namespace grapher
             this.inCapLabelYPower.Name = "inCapLabelYPower";
             this.inCapLabelYPower.Size = new System.Drawing.Size(56, 13);
             this.inCapLabelYPower.TabIndex = 217;
-            this.inCapLabelYPower.Text = "Cap: Input";
+            this.inCapLabelYPower.Text = "输入上限";
             // 
             // CapTypeLabelYPower
             // 
@@ -524,7 +524,7 @@ namespace grapher
             this.CapTypeLabelYPower.Name = "CapTypeLabelYPower";
             this.CapTypeLabelYPower.Size = new System.Drawing.Size(53, 13);
             this.CapTypeLabelYPower.TabIndex = 216;
-            this.CapTypeLabelYPower.Text = "Cap Type";
+            this.CapTypeLabelYPower.Text = "上限类型";
             // 
             // outCapLabelXPower
             // 
@@ -533,7 +533,7 @@ namespace grapher
             this.outCapLabelXPower.Name = "outCapLabelXPower";
             this.outCapLabelXPower.Size = new System.Drawing.Size(64, 13);
             this.outCapLabelXPower.TabIndex = 215;
-            this.outCapLabelXPower.Text = "Cap: Output";
+            this.outCapLabelXPower.Text = "输出上限";
             // 
             // inCapLabelXPower
             // 
@@ -542,7 +542,7 @@ namespace grapher
             this.inCapLabelXPower.Name = "inCapLabelXPower";
             this.inCapLabelXPower.Size = new System.Drawing.Size(56, 13);
             this.inCapLabelXPower.TabIndex = 214;
-            this.inCapLabelXPower.Text = "Cap: Input";
+            this.inCapLabelXPower.Text = "输入上限";
             // 
             // CapTypeLabelXPower
             // 
@@ -551,7 +551,7 @@ namespace grapher
             this.CapTypeLabelXPower.Name = "CapTypeLabelXPower";
             this.CapTypeLabelXPower.Size = new System.Drawing.Size(53, 13);
             this.CapTypeLabelXPower.TabIndex = 213;
-            this.CapTypeLabelXPower.Text = "Cap Type";
+            this.CapTypeLabelXPower.Text = "上限类型";
             // 
             // CapTypeActiveYLabelClassic
             // 
@@ -560,7 +560,7 @@ namespace grapher
             this.CapTypeActiveYLabelClassic.Name = "CapTypeActiveYLabelClassic";
             this.CapTypeActiveYLabelClassic.Size = new System.Drawing.Size(16, 13);
             this.CapTypeActiveYLabelClassic.TabIndex = 206;
-            this.CapTypeActiveYLabelClassic.Text = "In";
+            this.CapTypeActiveYLabelClassic.Text = "输入";
             // 
             // CapTypeActiveXLabelClassic
             // 
@@ -569,7 +569,7 @@ namespace grapher
             this.CapTypeActiveXLabelClassic.Name = "CapTypeActiveXLabelClassic";
             this.CapTypeActiveXLabelClassic.Size = new System.Drawing.Size(16, 13);
             this.CapTypeActiveXLabelClassic.TabIndex = 205;
-            this.CapTypeActiveXLabelClassic.Text = "In";
+            this.CapTypeActiveXLabelClassic.Text = "输入";
             // 
             // OutCapActiveYLabelClassic
             // 
@@ -596,7 +596,7 @@ namespace grapher
             this.outCapLabelYClassic.Name = "outCapLabelYClassic";
             this.outCapLabelYClassic.Size = new System.Drawing.Size(64, 13);
             this.outCapLabelYClassic.TabIndex = 202;
-            this.outCapLabelYClassic.Text = "Cap: Output";
+            this.outCapLabelYClassic.Text = "输出上限";
             // 
             // outCapLabelXClassic
             // 
@@ -605,7 +605,7 @@ namespace grapher
             this.outCapLabelXClassic.Name = "outCapLabelXClassic";
             this.outCapLabelXClassic.Size = new System.Drawing.Size(64, 13);
             this.outCapLabelXClassic.TabIndex = 201;
-            this.outCapLabelXClassic.Text = "Cap: Output";
+            this.outCapLabelXClassic.Text = "输出上限";
             // 
             // CapTypeLabelYClassic
             // 
@@ -614,7 +614,7 @@ namespace grapher
             this.CapTypeLabelYClassic.Name = "CapTypeLabelYClassic";
             this.CapTypeLabelYClassic.Size = new System.Drawing.Size(53, 13);
             this.CapTypeLabelYClassic.TabIndex = 198;
-            this.CapTypeLabelYClassic.Text = "Cap Type";
+            this.CapTypeLabelYClassic.Text = "上限类型";
             // 
             // CapTypeLabelXClassic
             // 
@@ -623,7 +623,7 @@ namespace grapher
             this.CapTypeLabelXClassic.Name = "CapTypeLabelXClassic";
             this.CapTypeLabelXClassic.Size = new System.Drawing.Size(53, 13);
             this.CapTypeLabelXClassic.TabIndex = 197;
-            this.CapTypeLabelXClassic.Text = "Cap Type";
+            this.CapTypeLabelXClassic.Text = "上限类型";
             // 
             // VertHorzRatioLabel
             // 
@@ -632,7 +632,7 @@ namespace grapher
             this.VertHorzRatioLabel.Name = "VertHorzRatioLabel";
             this.VertHorzRatioLabel.Size = new System.Drawing.Size(59, 13);
             this.VertHorzRatioLabel.TabIndex = 194;
-            this.VertHorzRatioLabel.Text = "Y to X ratio";
+            this.VertHorzRatioLabel.Text = "纵横灵敏度比";
             // 
             // SmoothActiveYLabel
             // 
@@ -650,7 +650,7 @@ namespace grapher
             this.smoothLabelY.Name = "smoothLabelY";
             this.smoothLabelY.Size = new System.Drawing.Size(43, 13);
             this.smoothLabelY.TabIndex = 192;
-            this.smoothLabelY.Text = "Smooth";
+            this.smoothLabelY.Text = "平滑度";
             // 
             // SmoothActiveXLabel
             // 
@@ -668,7 +668,7 @@ namespace grapher
             this.smoothLabelX.Name = "smoothLabelX";
             this.smoothLabelX.Size = new System.Drawing.Size(43, 13);
             this.smoothLabelX.TabIndex = 190;
-            this.smoothLabelX.Text = "Smooth";
+            this.smoothLabelX.Text = "平滑度";
             // 
             // GammaActiveYLabel
             // 
@@ -713,7 +713,7 @@ namespace grapher
             this.gammaLabelY.Name = "gammaLabelY";
             this.gammaLabelY.Size = new System.Drawing.Size(67, 13);
             this.gammaLabelY.TabIndex = 183;
-            this.gammaLabelY.Text = "Gamma";
+            this.gammaLabelY.Text = "伽马";
             // 
             // gammaLabelX
             // 
@@ -722,7 +722,7 @@ namespace grapher
             this.gammaLabelX.Name = "gammaLabelX";
             this.gammaLabelX.Size = new System.Drawing.Size(67, 13);
             this.gammaLabelX.TabIndex = 182;
-            this.gammaLabelX.Text = "Gamma";
+            this.gammaLabelX.Text = "伽马";
             // 
             // decayRateLabelY
             // 
@@ -731,7 +731,7 @@ namespace grapher
             this.decayRateLabelY.Name = "decayRateLabelY";
             this.decayRateLabelY.Size = new System.Drawing.Size(64, 13);
             this.decayRateLabelY.TabIndex = 181;
-            this.decayRateLabelY.Text = "Decay Rate";
+            this.decayRateLabelY.Text = "衰减速率";
             // 
             // decayRateLabelX
             // 
@@ -740,7 +740,7 @@ namespace grapher
             this.decayRateLabelX.Name = "decayRateLabelX";
             this.decayRateLabelX.Size = new System.Drawing.Size(64, 13);
             this.decayRateLabelX.TabIndex = 180;
-            this.decayRateLabelX.Text = "Decay Rate";
+            this.decayRateLabelX.Text = "衰减速率";
             // 
             // PowerClassicActiveYLabel
             // 
@@ -767,7 +767,7 @@ namespace grapher
             this.powerLabelY.Name = "powerLabelY";
             this.powerLabelY.Size = new System.Drawing.Size(37, 13);
             this.powerLabelY.TabIndex = 173;
-            this.powerLabelY.Text = "Power";
+            this.powerLabelY.Text = "幂指数";
             // 
             // powerLabelX
             // 
@@ -776,7 +776,7 @@ namespace grapher
             this.powerLabelX.Name = "powerLabelX";
             this.powerLabelX.Size = new System.Drawing.Size(37, 13);
             this.powerLabelX.TabIndex = 172;
-            this.powerLabelX.Text = "Power";
+            this.powerLabelX.Text = "幂指数";
             // 
             // YLutActiveValuesBox
             // 
@@ -821,7 +821,7 @@ namespace grapher
             this.YLutApplyLabel.Name = "YLutApplyLabel";
             this.YLutApplyLabel.Size = new System.Drawing.Size(47, 13);
             this.YLutApplyLabel.TabIndex = 163;
-            this.YLutApplyLabel.Text = "Apply as";
+            this.YLutApplyLabel.Text = "应用方式";
             // 
             // XLutApplyLabel
             // 
@@ -830,7 +830,7 @@ namespace grapher
             this.XLutApplyLabel.Name = "XLutApplyLabel";
             this.XLutApplyLabel.Size = new System.Drawing.Size(47, 13);
             this.XLutApplyLabel.TabIndex = 162;
-            this.XLutApplyLabel.Text = "Apply as";
+            this.XLutApplyLabel.Text = "应用方式";
             // 
             // YLutPointsBox
             // 
@@ -855,7 +855,7 @@ namespace grapher
             this.gainSwitchActiveLabelY.Name = "gainSwitchActiveLabelY";
             this.gainSwitchActiveLabelY.Size = new System.Drawing.Size(29, 13);
             this.gainSwitchActiveLabelY.TabIndex = 157;
-            this.gainSwitchActiveLabelY.Text = "Gain";
+            this.gainSwitchActiveLabelY.Text = "增益";
             // 
             // gainSwitchActiveLabelX
             // 
@@ -864,7 +864,7 @@ namespace grapher
             this.gainSwitchActiveLabelX.Name = "gainSwitchActiveLabelX";
             this.gainSwitchActiveLabelX.Size = new System.Drawing.Size(29, 13);
             this.gainSwitchActiveLabelX.TabIndex = 156;
-            this.gainSwitchActiveLabelX.Text = "Gain";
+            this.gainSwitchActiveLabelX.Text = "增益";
             // 
             // gainSwitchY
             // 
@@ -875,7 +875,7 @@ namespace grapher
             this.gainSwitchY.Name = "gainSwitchY";
             this.gainSwitchY.Size = new System.Drawing.Size(48, 17);
             this.gainSwitchY.TabIndex = 141;
-            this.gainSwitchY.Text = "Gain";
+            this.gainSwitchY.Text = "增益";
             this.gainSwitchY.UseVisualStyleBackColor = true;
             // 
             // gainSwitchX
@@ -887,7 +887,7 @@ namespace grapher
             this.gainSwitchX.Name = "gainSwitchX";
             this.gainSwitchX.Size = new System.Drawing.Size(48, 17);
             this.gainSwitchX.TabIndex = 41;
-            this.gainSwitchX.Text = "Gain";
+            this.gainSwitchX.Text = "增益";
             this.gainSwitchX.UseVisualStyleBackColor = true;
             // 
             // LUTTextLabelY
@@ -897,7 +897,7 @@ namespace grapher
             this.LUTTextLabelY.Name = "LUTTextLabelY";
             this.LUTTextLabelY.Size = new System.Drawing.Size(52, 13);
             this.LUTTextLabelY.TabIndex = 153;
-            this.LUTTextLabelY.Text = "LUT Text";
+            this.LUTTextLabelY.Text = "查找表文本";
             // 
             // LUTTextLabelX
             // 
@@ -906,7 +906,7 @@ namespace grapher
             this.LUTTextLabelX.Name = "LUTTextLabelX";
             this.LUTTextLabelX.Size = new System.Drawing.Size(52, 13);
             this.LUTTextLabelX.TabIndex = 152;
-            this.LUTTextLabelX.Text = "LUT Text";
+            this.LUTTextLabelX.Text = "查找表文本";
             // 
             // FakeBox
             // 
@@ -996,7 +996,7 @@ namespace grapher
             this.DirectionalityActiveValueTitle.Name = "DirectionalityActiveValueTitle";
             this.DirectionalityActiveValueTitle.Size = new System.Drawing.Size(41, 13);
             this.DirectionalityActiveValueTitle.TabIndex = 13;
-            this.DirectionalityActiveValueTitle.Text = "Current";
+            this.DirectionalityActiveValueTitle.Text = "当前值";
             // 
             // ByComponentCheckBox
             // 
@@ -1006,7 +1006,7 @@ namespace grapher
             this.ByComponentCheckBox.Name = "ByComponentCheckBox";
             this.ByComponentCheckBox.Size = new System.Drawing.Size(95, 17);
             this.ByComponentCheckBox.TabIndex = 12;
-            this.ByComponentCheckBox.Text = "By Component";
+            this.ByComponentCheckBox.Text = "按分量";
             this.ByComponentCheckBox.UseVisualStyleBackColor = true;
             // 
             // WholeCheckBox
@@ -1017,7 +1017,7 @@ namespace grapher
             this.WholeCheckBox.Name = "WholeCheckBox";
             this.WholeCheckBox.Size = new System.Drawing.Size(57, 17);
             this.WholeCheckBox.TabIndex = 11;
-            this.WholeCheckBox.Text = "Whole";
+            this.WholeCheckBox.Text = "整体";
             this.WholeCheckBox.UseVisualStyleBackColor = true;
             // 
             // DirectionalityRangeLabel
@@ -1027,7 +1027,7 @@ namespace grapher
             this.DirectionalityRangeLabel.Name = "DirectionalityRangeLabel";
             this.DirectionalityRangeLabel.Size = new System.Drawing.Size(39, 13);
             this.DirectionalityRangeLabel.TabIndex = 10;
-            this.DirectionalityRangeLabel.Text = "Range";
+            this.DirectionalityRangeLabel.Text = "值域";
             // 
             // DirectionalDomainLabel
             // 
@@ -1036,7 +1036,7 @@ namespace grapher
             this.DirectionalDomainLabel.Name = "DirectionalDomainLabel";
             this.DirectionalDomainLabel.Size = new System.Drawing.Size(43, 13);
             this.DirectionalDomainLabel.TabIndex = 9;
-            this.DirectionalDomainLabel.Text = "Domain";
+            this.DirectionalDomainLabel.Text = "定义域";
             // 
             // LPNormLabel
             // 
@@ -1045,7 +1045,7 @@ namespace grapher
             this.LPNormLabel.Name = "LPNormLabel";
             this.LPNormLabel.Size = new System.Drawing.Size(47, 13);
             this.LPNormLabel.TabIndex = 7;
-            this.LPNormLabel.Text = "Lp Norm";
+            this.LPNormLabel.Text = "Lp 范数";
             // 
             // DirectionalityY
             // 
@@ -1074,7 +1074,7 @@ namespace grapher
             this.DirectionalityLabel.Name = "DirectionalityLabel";
             this.DirectionalityLabel.Size = new System.Drawing.Size(79, 25);
             this.DirectionalityLabel.TabIndex = 0;
-            this.DirectionalityLabel.Text = "Directionality";
+            this.DirectionalityLabel.Text = "方向性";
             // 
             // toggleButton
             // 
@@ -1082,7 +1082,7 @@ namespace grapher
             this.toggleButton.Name = "toggleButton";
             this.toggleButton.Size = new System.Drawing.Size(104, 24);
             this.toggleButton.TabIndex = 950;
-            this.toggleButton.Text = "toggle";
+            this.toggleButton.Text = "切换";
             this.toggleButton.UseVisualStyleBackColor = true;
             // 
             // scaleLabelY
@@ -1092,7 +1092,7 @@ namespace grapher
             this.scaleLabelY.Name = "scaleLabelY";
             this.scaleLabelY.Size = new System.Drawing.Size(34, 13);
             this.scaleLabelY.TabIndex = 149;
-            this.scaleLabelY.Text = "Scale";
+            this.scaleLabelY.Text = "缩放";
             // 
             // ScaleActiveYLabel
             // 
@@ -1119,7 +1119,7 @@ namespace grapher
             this.scaleLabelX.Name = "scaleLabelX";
             this.scaleLabelX.Size = new System.Drawing.Size(34, 13);
             this.scaleLabelX.TabIndex = 146;
-            this.scaleLabelX.Text = "Scale";
+            this.scaleLabelX.Text = "缩放";
             this.scaleLabelX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // expLabelY
@@ -1129,7 +1129,7 @@ namespace grapher
             this.expLabelY.Name = "expLabelY";
             this.expLabelY.Size = new System.Drawing.Size(52, 13);
             this.expLabelY.TabIndex = 145;
-            this.expLabelY.Text = "Exponent";
+            this.expLabelY.Text = "指数";
             // 
             // ExpActiveYLabel
             // 
@@ -1156,7 +1156,7 @@ namespace grapher
             this.expLabelX.Name = "expLabelX";
             this.expLabelX.Size = new System.Drawing.Size(52, 13);
             this.expLabelX.TabIndex = 142;
-            this.expLabelX.Text = "Exponent";
+            this.expLabelX.Text = "指数";
             this.expLabelX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ActiveValueTitleY
@@ -1166,7 +1166,7 @@ namespace grapher
             this.ActiveValueTitleY.Name = "ActiveValueTitleY";
             this.ActiveValueTitleY.Size = new System.Drawing.Size(41, 13);
             this.ActiveValueTitleY.TabIndex = 141;
-            this.ActiveValueTitleY.Text = "Current";
+            this.ActiveValueTitleY.Text = "当前值";
             // 
             // AccelTypeActiveLabelY
             // 
@@ -1202,7 +1202,7 @@ namespace grapher
             this.constantThreeLabelY.Name = "constantThreeLabelY";
             this.constantThreeLabelY.Size = new System.Drawing.Size(47, 13);
             this.constantThreeLabelY.TabIndex = 137;
-            this.constantThreeLabelY.Text = "SyncSpeed";
+            this.constantThreeLabelY.Text = "同步速度";
             // 
             // limitLabelY
             // 
@@ -1211,7 +1211,7 @@ namespace grapher
             this.limitLabelY.Name = "limitLabelY";
             this.limitLabelY.Size = new System.Drawing.Size(28, 13);
             this.limitLabelY.TabIndex = 136;
-            this.limitLabelY.Text = "Limit";
+            this.limitLabelY.Text = "上限";
             // 
             // inputJumpLabelY
             // 
@@ -1220,7 +1220,7 @@ namespace grapher
             this.inputJumpLabelY.Name = "inputJumpLabelY";
             this.inputJumpLabelY.Size = new System.Drawing.Size(31, 13);
             this.inputJumpLabelY.TabIndex = 135;
-            this.inputJumpLabelY.Text = "Input";
+            this.inputJumpLabelY.Text = "输入";
             // 
             // outputJumpLabelY
             // 
@@ -1229,7 +1229,7 @@ namespace grapher
             this.outputJumpLabelY.Name = "outputJumpLabelY";
             this.outputJumpLabelY.Size = new System.Drawing.Size(39, 13);
             this.outputJumpLabelY.TabIndex = 135;
-            this.outputJumpLabelY.Text = "Output";
+            this.outputJumpLabelY.Text = "输出";
             // 
             // inputOffsetLabelY
             // 
@@ -1238,7 +1238,7 @@ namespace grapher
             this.inputOffsetLabelY.Name = "inputOffsetLabelY";
             this.inputOffsetLabelY.Size = new System.Drawing.Size(62, 13);
             this.inputOffsetLabelY.TabIndex = 135;
-            this.inputOffsetLabelY.Text = "Input Offset";
+            this.inputOffsetLabelY.Text = "输入阈值";
             // 
             // outputOffsetLabelY
             // 
@@ -1247,7 +1247,7 @@ namespace grapher
             this.outputOffsetLabelY.Name = "outputOffsetLabelY";
             this.outputOffsetLabelY.Size = new System.Drawing.Size(70, 13);
             this.outputOffsetLabelY.TabIndex = 135;
-            this.outputOffsetLabelY.Text = "Output Offset";
+            this.outputOffsetLabelY.Text = "输出偏移";
             // 
             // inCapLabelYClassic
             // 
@@ -1256,7 +1256,7 @@ namespace grapher
             this.inCapLabelYClassic.Name = "inCapLabelYClassic";
             this.inCapLabelYClassic.Size = new System.Drawing.Size(56, 13);
             this.inCapLabelYClassic.TabIndex = 133;
-            this.inCapLabelYClassic.Text = "Cap: Input";
+            this.inCapLabelYClassic.Text = "输入上限";
             // 
             // constantOneLabelY
             // 
@@ -1265,7 +1265,7 @@ namespace grapher
             this.constantOneLabelY.Name = "constantOneLabelY";
             this.constantOneLabelY.Size = new System.Drawing.Size(66, 13);
             this.constantOneLabelY.TabIndex = 132;
-            this.constantOneLabelY.Text = "Acceleration";
+            this.constantOneLabelY.Text = "加速度";
             // 
             // ByComponentXYLock
             // 
@@ -1465,7 +1465,7 @@ namespace grapher
             this.ActiveValueTitle.Name = "ActiveValueTitle";
             this.ActiveValueTitle.Size = new System.Drawing.Size(41, 13);
             this.ActiveValueTitle.TabIndex = 115;
-            this.ActiveValueTitle.Text = "Current";
+            this.ActiveValueTitle.Text = "当前值";
             // 
             // MouseLabel
             // 
@@ -1474,7 +1474,7 @@ namespace grapher
             this.MouseLabel.Name = "MouseLabel";
             this.MouseLabel.Size = new System.Drawing.Size(80, 13);
             this.MouseLabel.TabIndex = 114;
-            this.MouseLabel.Text = "Last (x, y): (x, y)";
+            this.MouseLabel.Text = "最近移动 (x, y)：(x, y)";
             // 
             // LockXYLabel
             // 
@@ -1483,7 +1483,7 @@ namespace grapher
             this.LockXYLabel.Name = "LockXYLabel";
             this.LockXYLabel.Size = new System.Drawing.Size(60, 13);
             this.LockXYLabel.TabIndex = 113;
-            this.LockXYLabel.Text = "Lock X && Y";
+            this.LockXYLabel.Text = "锁定 X 和 Y";
             // 
             // sensXYLock
             // 
@@ -1503,7 +1503,7 @@ namespace grapher
             this.writeButton.Name = "writeButton";
             this.writeButton.Size = new System.Drawing.Size(92, 35);
             this.writeButton.TabIndex = 900;
-            this.writeButton.Text = "Apply";
+            this.writeButton.Text = "应用";
             this.writeButton.UseVisualStyleBackColor = true;
             // 
             // inputJumpLabelX
@@ -1513,7 +1513,7 @@ namespace grapher
             this.inputJumpLabelX.Name = "inputJumpLabelX";
             this.inputJumpLabelX.Size = new System.Drawing.Size(59, 13);
             this.inputJumpLabelX.TabIndex = 107;
-            this.inputJumpLabelX.Text = "Input Jump";
+            this.inputJumpLabelX.Text = "输入跃变";
             this.inputJumpLabelX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // outputJumpLabelX
@@ -1523,7 +1523,7 @@ namespace grapher
             this.outputJumpLabelX.Name = "outputJumpLabelX";
             this.outputJumpLabelX.Size = new System.Drawing.Size(67, 13);
             this.outputJumpLabelX.TabIndex = 107;
-            this.outputJumpLabelX.Text = "Output Jump";
+            this.outputJumpLabelX.Text = "输出跃变";
             this.outputJumpLabelX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // inputOffsetLabelX
@@ -1533,7 +1533,7 @@ namespace grapher
             this.inputOffsetLabelX.Name = "inputOffsetLabelX";
             this.inputOffsetLabelX.Size = new System.Drawing.Size(62, 13);
             this.inputOffsetLabelX.TabIndex = 107;
-            this.inputOffsetLabelX.Text = "Input Offset";
+            this.inputOffsetLabelX.Text = "输入阈值";
             this.inputOffsetLabelX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // outputOffsetLabelX
@@ -1543,7 +1543,7 @@ namespace grapher
             this.outputOffsetLabelX.Name = "outputOffsetLabelX";
             this.outputOffsetLabelX.Size = new System.Drawing.Size(70, 13);
             this.outputOffsetLabelX.TabIndex = 107;
-            this.outputOffsetLabelX.Text = "Output Offset";
+            this.outputOffsetLabelX.Text = "输出偏移";
             this.outputOffsetLabelX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // constantThreeLabelX
@@ -1553,7 +1553,7 @@ namespace grapher
             this.constantThreeLabelX.Name = "constantThreeLabelX";
             this.constantThreeLabelX.Size = new System.Drawing.Size(47, 13);
             this.constantThreeLabelX.TabIndex = 105;
-            this.constantThreeLabelX.Text = "SyncSpeed";
+            this.constantThreeLabelX.Text = "同步速度";
             this.constantThreeLabelX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // limitLabelX
@@ -1563,7 +1563,7 @@ namespace grapher
             this.limitLabelX.Name = "limitLabelX";
             this.limitLabelX.Size = new System.Drawing.Size(28, 13);
             this.limitLabelX.TabIndex = 101;
-            this.limitLabelX.Text = "Limit";
+            this.limitLabelX.Text = "上限";
             this.limitLabelX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // inCapLabelXClassic
@@ -1573,7 +1573,7 @@ namespace grapher
             this.inCapLabelXClassic.Name = "inCapLabelXClassic";
             this.inCapLabelXClassic.Size = new System.Drawing.Size(56, 13);
             this.inCapLabelXClassic.TabIndex = 94;
-            this.inCapLabelXClassic.Text = "Cap: Input";
+            this.inCapLabelXClassic.Text = "输入上限";
             this.inCapLabelXClassic.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // constantOneLabelX
@@ -1583,7 +1583,7 @@ namespace grapher
             this.constantOneLabelX.Name = "constantOneLabelX";
             this.constantOneLabelX.Size = new System.Drawing.Size(66, 13);
             this.constantOneLabelX.TabIndex = 91;
-            this.constantOneLabelX.Text = "Acceleration";
+            this.constantOneLabelX.Text = "加速度";
             this.constantOneLabelX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // rotationLabel
@@ -1593,7 +1593,7 @@ namespace grapher
             this.rotationLabel.Name = "rotationLabel";
             this.rotationLabel.Size = new System.Drawing.Size(47, 13);
             this.rotationLabel.TabIndex = 87;
-            this.rotationLabel.Text = "Rotation";
+            this.rotationLabel.Text = "旋转角度";
             // 
             // sensitivityLabel
             // 
@@ -1602,7 +1602,7 @@ namespace grapher
             this.sensitivityLabel.Name = "sensitivityLabel";
             this.sensitivityLabel.Size = new System.Drawing.Size(75, 13);
             this.sensitivityLabel.TabIndex = 85;
-            this.sensitivityLabel.Text = "Sens Multiplier";
+            this.sensitivityLabel.Text = "灵敏度倍率";
             // 
             // menuStrip1
             // 
@@ -1627,7 +1627,7 @@ namespace grapher
             this.graphsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.graphsToolStripMenuItem.Name = "graphsToolStripMenuItem";
             this.graphsToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.graphsToolStripMenuItem.Text = "Charts";
+            this.graphsToolStripMenuItem.Text = "图表";
             // 
             // scaleByDPIToolStripMenuItem
             // 
@@ -1637,7 +1637,7 @@ namespace grapher
             this.ScaleMenuItem});
             this.scaleByDPIToolStripMenuItem.Name = "scaleByDPIToolStripMenuItem";
             this.scaleByDPIToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.scaleByDPIToolStripMenuItem.Text = "Scale by Mouse Settings";
+            this.scaleByDPIToolStripMenuItem.Text = "按鼠标参数缩放";
             // 
             // dPIToolStripMenuItem
             // 
@@ -1658,7 +1658,7 @@ namespace grapher
             this.PollRateTextBox});
             this.pollRateToolStripMenuItem.Name = "pollRateToolStripMenuItem";
             this.pollRateToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.pollRateToolStripMenuItem.Text = "Poll Rate";
+            this.pollRateToolStripMenuItem.Text = "回报率";
             // 
             // PollRateTextBox
             // 
@@ -1669,13 +1669,13 @@ namespace grapher
             // 
             this.ScaleMenuItem.Name = "ScaleMenuItem";
             this.ScaleMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.ScaleMenuItem.Text = "Re-scale by above";
+            this.ScaleMenuItem.Text = "按上述参数重新缩放";
             // 
             // showVelocityGainToolStripMenuItem
             // 
             this.showVelocityGainToolStripMenuItem.Name = "showVelocityGainToolStripMenuItem";
             this.showVelocityGainToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.showVelocityGainToolStripMenuItem.Text = "Show Velocity && Gain";
+            this.showVelocityGainToolStripMenuItem.Text = "显示速度和增益";
             // 
             // showLastMouseMoveToolStripMenuItem
             // 
@@ -1684,7 +1684,7 @@ namespace grapher
             this.showLastMouseMoveToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showLastMouseMoveToolStripMenuItem.Name = "showLastMouseMoveToolStripMenuItem";
             this.showLastMouseMoveToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.showLastMouseMoveToolStripMenuItem.Text = "Show Last Mouse Move";
+            this.showLastMouseMoveToolStripMenuItem.Text = "显示最近移动";
             // 
             // advancedToolStripMenuItem
             // 
@@ -1693,7 +1693,7 @@ namespace grapher
             this.DeviceMenuItem});
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
             this.advancedToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
-            this.advancedToolStripMenuItem.Text = "Advanced";
+            this.advancedToolStripMenuItem.Text = "高级";
             // 
             // AutoWriteMenuItem
             // 
@@ -1702,13 +1702,13 @@ namespace grapher
             this.AutoWriteMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AutoWriteMenuItem.Name = "AutoWriteMenuItem";
             this.AutoWriteMenuItem.Size = new System.Drawing.Size(257, 22);
-            this.AutoWriteMenuItem.Text = "Apply Settings.json On GUI Startup";
+            this.AutoWriteMenuItem.Text = "界面启动时应用 settings.json";
             // 
             // DeviceMenuItem
             // 
             this.DeviceMenuItem.Name = "DeviceMenuItem";
             this.DeviceMenuItem.Size = new System.Drawing.Size(257, 22);
-            this.DeviceMenuItem.Text = "Device Menu";
+            this.DeviceMenuItem.Text = "设备设置";
             // 
             // chartsPanel
             // 
@@ -1725,8 +1725,8 @@ namespace grapher
             this.GainChartY.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea2.AxisX.Title = "Input Speed (counts/ms)";
-            chartArea2.AxisY.Title = "Slope of Velocity Chart";
+            chartArea2.AxisX.Title = "输入速度（计数/毫秒）";
+            chartArea2.AxisY.Title = "速度曲线斜率";
             chartArea2.Name = "ChartArea1";
             this.GainChartY.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
@@ -1737,11 +1737,13 @@ namespace grapher
             series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series5.Legend = "Legend1";
             series5.Name = "Velocity Gain";
+            series5.LegendText = "速度增益";
             series6.ChartArea = "ChartArea1";
             series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series6.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             series6.Legend = "Legend1";
             series6.Name = "Last Mouse Move";
+            series6.LegendText = "最近移动";
             series7.ChartArea = "ChartArea1";
             series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series7.IsVisibleInLegend = false;
@@ -1757,7 +1759,7 @@ namespace grapher
             title2.DockedToChartArea = "ChartArea1";
             title2.IsDockedInsideChartArea = false;
             title2.Name = "Title";
-            title2.Text = "Gain";
+            title2.Text = "增益";
             this.GainChartY.Titles.Add(title2);
             // 
             // VelocityChartY
@@ -1765,8 +1767,8 @@ namespace grapher
             this.VelocityChartY.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea5.AxisX.Title = "Input Speed (count/ms)";
-            chartArea5.AxisY.Title = "Output Speed (counts/ms)";
+            chartArea5.AxisX.Title = "输入速度（计数/毫秒）";
+            chartArea5.AxisY.Title = "输出速度（计数/毫秒）";
             chartArea5.Name = "ChartArea1";
             this.VelocityChartY.ChartAreas.Add(chartArea5);
             legend5.Name = "Legend1";
@@ -1777,11 +1779,13 @@ namespace grapher
             series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series16.Legend = "Legend1";
             series16.Name = "Output Velocity";
+            series16.LegendText = "输出速度";
             series17.ChartArea = "ChartArea1";
             series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series17.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             series17.Legend = "Legend1";
             series17.Name = "Last Mouse Move";
+            series17.LegendText = "最近移动";
             series18.ChartArea = "ChartArea1";
             series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series18.IsVisibleInLegend = false;
@@ -1797,7 +1801,7 @@ namespace grapher
             title5.DockedToChartArea = "ChartArea1";
             title5.IsDockedInsideChartArea = false;
             title5.Name = "Title";
-            title5.Text = "Velocity";
+            title5.Text = "速度";
             this.VelocityChartY.Titles.Add(title5);
             // 
             // AccelerationChartY
@@ -1805,8 +1809,8 @@ namespace grapher
             this.AccelerationChartY.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea6.AxisX.Title = "Input Speed (counts/ms)";
-            chartArea6.AxisY.Title = "Ratio of Output to Input)";
+            chartArea6.AxisX.Title = "输入速度（计数/毫秒）";
+            chartArea6.AxisY.Title = "输出与输入之比";
             chartArea6.Name = "ChartArea1";
             this.AccelerationChartY.ChartAreas.Add(chartArea6);
             legend6.Name = "Legend1";
@@ -1817,11 +1821,13 @@ namespace grapher
             series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series19.Legend = "Legend1";
             series19.Name = "Accelerated Sensitivity";
+            series19.LegendText = "加速后灵敏度";
             series20.ChartArea = "ChartArea1";
             series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series20.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             series20.Legend = "Legend1";
             series20.Name = "Last Mouse Move";
+            series20.LegendText = "最近移动";
             series21.ChartArea = "ChartArea1";
             series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series21.IsVisibleInLegend = false;
@@ -1837,7 +1843,7 @@ namespace grapher
             title6.DockedToChartArea = "ChartArea1";
             title6.IsDockedInsideChartArea = false;
             title6.Name = "Title";
-            title6.Text = "Sensitivity";
+            title6.Text = "灵敏度";
             this.AccelerationChartY.Titles.Add(title6);
             // 
             // GainChart
@@ -1845,8 +1851,8 @@ namespace grapher
             this.GainChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea4.AxisX.Title = "Input Speed (counts/ms)";
-            chartArea4.AxisY.Title = "Slope of Velocity Chart";
+            chartArea4.AxisX.Title = "输入速度（计数/毫秒）";
+            chartArea4.AxisY.Title = "速度曲线斜率";
             chartArea4.Name = "ChartArea1";
             this.GainChart.ChartAreas.Add(chartArea4);
             legend4.Name = "Legend1";
@@ -1857,20 +1863,24 @@ namespace grapher
             series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series12.Legend = "Legend1";
             series12.Name = "Velocity Gain";
+            series12.LegendText = "速度增益";
             series13.ChartArea = "ChartArea1";
             series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series13.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             series13.Legend = "Legend1";
             series13.Name = "Last Mouse Move";
+            series13.LegendText = "最近移动";
             series14.ChartArea = "ChartArea1";
             series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series14.Legend = "Legend1";
             series14.Name = "Y: Velocity Gain";
+            series14.LegendText = "Y：速度增益";
             series15.ChartArea = "ChartArea1";
             series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series15.IsVisibleInLegend = false;
             series15.Legend = "Legend1";
             series15.Name = "Y: Last Mouse Move";
+            series15.LegendText = "Y：最近移动";
             this.GainChart.Series.Add(series12);
             this.GainChart.Series.Add(series13);
             this.GainChart.Series.Add(series14);
@@ -1882,7 +1892,7 @@ namespace grapher
             title4.DockedToChartArea = "ChartArea1";
             title4.IsDockedInsideChartArea = false;
             title4.Name = "Title";
-            title4.Text = "Gain";
+            title4.Text = "增益";
             this.GainChart.Titles.Add(title4);
             // 
             // VelocityChart
@@ -1890,8 +1900,8 @@ namespace grapher
             this.VelocityChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea3.AxisX.Title = "Input Speed (count/ms)";
-            chartArea3.AxisY.Title = "Output Speed (counts/ms)";
+            chartArea3.AxisX.Title = "输入速度（计数/毫秒）";
+            chartArea3.AxisY.Title = "输出速度（计数/毫秒）";
             chartArea3.Name = "ChartArea1";
             this.VelocityChart.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
@@ -1902,20 +1912,24 @@ namespace grapher
             series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series8.Legend = "Legend1";
             series8.Name = "Output Velocity";
+            series8.LegendText = "输出速度";
             series9.ChartArea = "ChartArea1";
             series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series9.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             series9.Legend = "Legend1";
             series9.Name = "Last Mouse Move";
+            series9.LegendText = "最近移动";
             series10.ChartArea = "ChartArea1";
             series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series10.Legend = "Legend1";
             series10.Name = "Y: Output Velocity";
+            series10.LegendText = "Y：输出速度";
             series11.ChartArea = "ChartArea1";
             series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series11.IsVisibleInLegend = false;
             series11.Legend = "Legend1";
             series11.Name = "Y: Last Mouse Move";
+            series11.LegendText = "Y：最近移动";
             this.VelocityChart.Series.Add(series8);
             this.VelocityChart.Series.Add(series9);
             this.VelocityChart.Series.Add(series10);
@@ -1927,7 +1941,7 @@ namespace grapher
             title3.DockedToChartArea = "ChartArea1";
             title3.IsDockedInsideChartArea = false;
             title3.Name = "Title";
-            title3.Text = "Velocity";
+            title3.Text = "速度";
             this.VelocityChart.Titles.Add(title3);
             // 
             // AccelerationChart
@@ -1935,8 +1949,8 @@ namespace grapher
             this.AccelerationChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.AxisX.Title = "Input Speed (counts/ms)";
-            chartArea1.AxisY.Title = "Ratio of Output to Input";
+            chartArea1.AxisX.Title = "输入速度（计数/毫秒）";
+            chartArea1.AxisY.Title = "输出与输入之比";
             chartArea1.Name = "ChartArea1";
             this.AccelerationChart.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
@@ -1947,20 +1961,24 @@ namespace grapher
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "Accelerated Sensitivity";
+            series1.LegendText = "加速后灵敏度";
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             series2.Legend = "Legend1";
             series2.Name = "Last Mouse Move";
+            series2.LegendText = "最近移动";
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series3.Legend = "Legend1";
             series3.Name = "Y: Accelerated Sensitivity";
+            series3.LegendText = "Y：加速后灵敏度";
             series4.ChartArea = "ChartArea1";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
             series4.IsVisibleInLegend = false;
             series4.Legend = "Legend1";
             series4.Name = "Y - Last Mouse Move";
+            series4.LegendText = "Y：最近移动";
             this.AccelerationChart.Series.Add(series1);
             this.AccelerationChart.Series.Add(series2);
             this.AccelerationChart.Series.Add(series3);
@@ -1968,11 +1986,11 @@ namespace grapher
             this.AccelerationChart.Size = new System.Drawing.Size(694, 312);
             this.AccelerationChart.TabIndex = 34;
             this.AccelerationChart.TabStop = false;
-            this.AccelerationChart.Text = "Sensitivity";
+            this.AccelerationChart.Text = "灵敏度";
             title1.DockedToChartArea = "ChartArea1";
             title1.IsDockedInsideChartArea = false;
             title1.Name = "Title";
-            title1.Text = "Sensitivity";
+            title1.Text = "灵敏度";
             this.AccelerationChart.Titles.Add(title1);
             // 
             // chartContainer
@@ -2214,7 +2232,7 @@ namespace grapher
             this.accelTypeDropY.Name = "accelTypeDropY";
             this.accelTypeDropY.Size = new System.Drawing.Size(76, 21);
             this.accelTypeDropY.TabIndex = 140;
-            this.accelTypeDropY.Text = "Accel Type";
+            this.accelTypeDropY.Text = "加速类型";
             // 
             // syncSpeedBoxY
             // 
@@ -2356,7 +2374,7 @@ namespace grapher
             this.accelTypeDropX.Name = "accelTypeDropX";
             this.accelTypeDropX.Size = new System.Drawing.Size(76, 21);
             this.accelTypeDropX.TabIndex = 40;
-            this.accelTypeDropX.Text = "Accel Type";
+            this.accelTypeDropX.Text = "加速类型";
             // 
             // RawAcceleration
             // 
@@ -2367,7 +2385,7 @@ namespace grapher
             this.Controls.Add(this.optionsPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RawAcceleration";
-            this.Text = "Raw Accel";
+            this.Text = "Raw Accel 简体中文版";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RawAcceleration_FormClosing);
             this.Shown += new System.EventHandler(this.RawAcceleration_Shown);
             this.optionsPanel.ResumeLayout(false);

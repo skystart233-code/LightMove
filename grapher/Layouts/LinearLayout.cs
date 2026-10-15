@@ -4,7 +4,7 @@ namespace grapher.Layouts
 {
     public class LinearLayout : LayoutBase
     {
-        public const string LinearName = "Linear";
+        public const string LinearName = "线性 Linear";
 
         public LinearLayout()
             : base()

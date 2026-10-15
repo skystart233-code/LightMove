@@ -11,8 +11,8 @@ namespace grapher.Models.Options
     {
         #region Constants
 
-        public const string LUTLayoutExpandedText = "This mode is for experts only. Format: x1,y1;x2,y2;...xn,yn;";
-        public const string LUTLayoutShortenedText = "Experts only.";
+        public const string LUTLayoutExpandedText = "仅供进阶用户。格式：x1,y1;x2,y2;...xn,yn;";
+        public const string LUTLayoutShortenedText = "仅供进阶用户。";
 
         #endregion Constants
 

@@ -7,7 +7,7 @@ namespace grapher.Layouts
         public ClassicLayout()
             : base()
         {
-            Name = "Classic";
+            Name = "经典 Classic";
             Mode = AccelMode.classic;
 
             GainSwitchOptionLayout = new OptionLayout(true, Gain);

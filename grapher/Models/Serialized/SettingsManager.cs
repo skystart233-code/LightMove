@@ -356,16 +356,15 @@ namespace grapher.Models.Serialized
                         return;
                     }
 
-                    SelectedTheme = item.Text;
-                    var colorScheme = ColorSchemeManager.FromName(item.Text);
+                    SelectedTheme = item.Name;
+                    var colorScheme = ColorSchemeManager.FromName(item.Name);
 
                     Theme.CurrentScheme = colorScheme;
                     Theme.Apply(Form);
                     GuiSettings.CurrentColorScheme = colorScheme.Name;
                     GuiSettings.Save();
 
-                    MessageBox.Show(@"If you switched between a light and dark theme, some colors might be off. 
-If this is the case, please restart the app to apply all colors correctly."); 
+                    MessageBox.Show("切换浅色或深色主题后，部分颜色可能需要重启软件才能完整生效。");
                 };
             }
         }

@@ -24,10 +24,10 @@ namespace grapher
 
             Version driverVersion = VersionHelper.ValidOrThrow();
 
-            ToolStripMenuItem HelpMenuItem = new ToolStripMenuItem("&Help");
+            ToolStripMenuItem HelpMenuItem = new ToolStripMenuItem("帮助(&H)");
 
             HelpMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
-                    new ToolStripMenuItem("&About", null, (s, e) => {
+                    new ToolStripMenuItem("关于(&A)", null, (s, e) => {
                         using (var form = new AboutBox(driverVersion))
                         {
                             Theme.Apply(form);
@@ -38,7 +38,7 @@ namespace grapher
             });
             
             var schemes = ColorSchemeManager.LoadSchemes().ToList();
-            var themeMenuItem = new ToolStripMenuItem("&Themes");
+            var themeMenuItem = new ToolStripMenuItem("主题(&T)");
 
             themeMenuItem.DropDownItemClicked += (s, e) =>
             {
@@ -56,7 +56,10 @@ namespace grapher
             
             foreach (var colorScheme in schemes)
             {
-                var menuItem = new ToolStripMenuItem(colorScheme.Name);
+                var menuItem = new ToolStripMenuItem(Chinese.ThemeName(colorScheme.Name))
+                {
+                    Name = colorScheme.Name,
+                };
 
                 menuItem.Checked = settings?.CurrentColorScheme == colorScheme.Name;
                 themeMenuItem.DropDownItems.Add(menuItem);
@@ -321,7 +324,7 @@ namespace grapher
 
             if (string.IsNullOrEmpty(startupFolder))
             {
-                throw new Exception("Startup folder does not exist");
+                throw new Exception("启动文件夹不存在");
             }
 
             //Windows Script Host Shell Object

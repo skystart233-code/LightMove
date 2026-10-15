@@ -16,7 +16,7 @@ namespace grapher.Layouts
         public LUTLayout()
             : base()
         {
-            Name = "LookUpTable";
+            Name = "查找表 LUT";
             Mode = AccelMode.lut;
 
             GainSwitchOptionLayout = new OptionLayout(false, string.Empty);

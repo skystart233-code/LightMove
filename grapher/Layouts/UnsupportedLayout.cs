@@ -8,12 +8,12 @@ namespace grapher.Layouts
 {
     public class UnsupportedLayout : LayoutBase
     {
-        public const string LUTLayoutText = "This mode is unsupported by this program. See the guide for details.";
+        public const string LUTLayoutText = "此界面不支持该模式，详情请参阅指南。";
 
         public UnsupportedLayout()
             : base()
         {
-            Name = "Unsupported";
+            Name = "不支持";
             Mode = AccelMode.noaccel + 1;
 
             GainSwitchOptionLayout = new OptionLayout(false, string.Empty);

@@ -37,9 +37,9 @@ namespace grapher
             }
 
             DpiLabel = MakeConfigLabel("DPI:");
-            RateLabel = MakeConfigLabel("Polling rate:");
-            DisableLabel = MakeConfigLabel("Disable:");
-            OverrideLabel = MakeConfigLabel("Override defaults:");
+            RateLabel = MakeConfigLabel("回报率：");
+            DisableLabel = MakeConfigLabel("禁用：");
+            OverrideLabel = MakeConfigLabel("覆盖默认值：");
 
             var maxLabel = OverrideLabel;
             tablePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 2));
@@ -61,7 +61,7 @@ namespace grapher
 
             DefaultDisableCheck = new CheckBox
             {
-                Text = "Disable by default",
+                Text = "默认禁用",
                 AutoSize = true,
                 Checked = defaultConfig.disable,
             };
@@ -79,7 +79,7 @@ namespace grapher
 
             var applyButton = new Button
             {
-                Text = "Apply",
+                Text = "应用",
                 DialogResult = DialogResult.OK,
             };
 
@@ -87,7 +87,7 @@ namespace grapher
                 applyButton,
                 new Button
                 {
-                    Text = "Cancel",
+                    Text = "取消",
                     DialogResult = DialogResult.Cancel,
                 },
             });
@@ -185,19 +185,19 @@ namespace grapher
             Disposed += OnDispose;
 
             var toolTip = new ToolTip();
-            toolTip.SetToolTip(IdText, "Device ID");
+            toolTip.SetToolTip(IdText, "设备 ID");
 
-            var rateTip = "Keep at 0 for automatic adjustment";
+            var rateTip = "保持为 0 时自动调整";
             toolTip.SetToolTip(RateInput, rateTip);
             toolTip.SetToolTip(RateLabel, rateTip);
 
-            var dpiTip = "Normalizes sensitivity and input speed to 1000 DPI";
+            var dpiTip = "将灵敏度和输入速度归一化至 1000 DPI";
             toolTip.SetToolTip(DpiInput, dpiTip);
             toolTip.SetToolTip(DpiLabel, dpiTip);
 
 
             Name = "DeviceMenuForm";
-            Text = "Devices";
+            Text = "设备";
             MaximizeBox = false;
             MinimizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedDialog;

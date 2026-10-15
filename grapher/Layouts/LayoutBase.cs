@@ -4,23 +4,23 @@ namespace grapher.Layouts
 {
     public abstract class LayoutBase
     {
-        public const string Acceleration = "Acceleration";
-        public const string Gamma = "Gamma";
-        public const string DecayRate = "Decay Rate";
-        public const string Scale = "Scale";
-        public const string Exponent = "Exponent";
-        public const string OutputOffset = "Output Offset";
-        public const string PowerClassic = "Power";
-        public const string Limit = "Limit";
-        public const string SyncSpeed = "SyncSpeed";
-        public const string Motivity = "Motivity";
-        public const string InputOffset = "Input Offset";
-        public const string CapType = "Cap Type";
-        public const string Weight = "Weight";
-        public const string Smooth = "Smooth";
-        public const string Gain = "Gain";
-        public const string Input = "Input";
-        public const string Output = "Output";
+        public const string Acceleration = "加速度";
+        public const string Gamma = "伽马";
+        public const string DecayRate = "衰减速率";
+        public const string Scale = "缩放";
+        public const string Exponent = "指数";
+        public const string OutputOffset = "输出偏移";
+        public const string PowerClassic = "幂指数";
+        public const string Limit = "上限";
+        public const string SyncSpeed = "同步速度";
+        public const string Motivity = "动度";
+        public const string InputOffset = "输入阈值";
+        public const string CapType = "上限类型";
+        public const string Weight = "权重";
+        public const string Smooth = "平滑度";
+        public const string Gain = "增益";
+        public const string Input = "输入";
+        public const string Output = "输出";
 
         public LayoutBase()
         {

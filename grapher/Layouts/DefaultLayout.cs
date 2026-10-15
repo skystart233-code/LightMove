@@ -7,7 +7,7 @@ namespace grapher.Layouts
         public DefaultLayout()
             : base()
         {
-            Name = "Default";
+            Name = "默认";
             Mode = AccelMode.noaccel;
             LogarithmicCharts = false;
 

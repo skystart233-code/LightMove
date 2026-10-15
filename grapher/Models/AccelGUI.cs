@@ -161,7 +161,7 @@ namespace grapher
                 error_message = e.Message;
             }
 
-            using (var form = new MessageDialog(error_message, "bad input"))
+            using (var form = new MessageDialog(error_message, "输入无效"))
             {
                 form.ShowDialog();
             }

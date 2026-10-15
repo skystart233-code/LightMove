@@ -80,7 +80,7 @@ namespace grapher
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(131, 17);
             this.labelVersion.TabIndex = 0;
-            this.labelVersion.Text = "GUI Version";
+            this.labelVersion.Text = "界面版本";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // okButton
@@ -91,7 +91,7 @@ namespace grapher
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 24;
-            this.okButton.Text = "&OK";
+            this.okButton.Text = "确定(&O)";
             // 
             // labelDriverVersion
             // 
@@ -102,7 +102,7 @@ namespace grapher
             this.labelDriverVersion.Name = "labelDriverVersion";
             this.labelDriverVersion.Size = new System.Drawing.Size(131, 17);
             this.labelDriverVersion.TabIndex = 25;
-            this.labelDriverVersion.Text = "Driver Version";
+            this.labelDriverVersion.Text = "驱动版本";
             this.labelDriverVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AboutBox

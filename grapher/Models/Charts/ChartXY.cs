@@ -276,7 +276,7 @@ namespace grapher
         {
             if (min > max)
             {
-                throw new ArgumentException($"invalid chart range: ({min}, {max})");
+                throw new ArgumentException($"图表范围无效：({min}, {max})");
             }
         }
 
