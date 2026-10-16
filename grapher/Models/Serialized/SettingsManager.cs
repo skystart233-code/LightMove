@@ -11,6 +11,7 @@ using System.Dynamic;
 using System.Linq;
 using grapher.Models.Theming;
 using grapher.Common;
+using System.Threading.Tasks;
 
 namespace grapher.Models.Serialized
 {
@@ -149,6 +150,48 @@ namespace grapher.Models.Serialized
         #endregion Properties
 
         #region Methods
+
+        /// <summary>Apply the editor's curve transactionally, preserving other profiles and devices.</summary>
+        public async Task ApplyGraphicalProfileAsync(Profile profile)
+        {
+            var previous = DriverConfig.GetActive();
+            string previousJson = previous.ToJSON();
+            var candidate = DriverConfig.Convert(previousJson).Item1;
+            candidate.SetProfileAt(0, profile);
+            var errors = candidate.Errors();
+            if (errors != null) throw new ApplicationException(errors);
+            string expected = candidate.ToJSON();
+            string settingsPath = Path.Combine(Application.StartupPath, Constants.DefaultSettingsFileName);
+            string backupDirectory = Path.Combine(Application.StartupPath, "curve-backups");
+            Directory.CreateDirectory(backupDirectory);
+            File.WriteAllText(Path.Combine(backupDirectory, "before-" + DateTime.Now.ToString("yyyyMMdd-HHmmss-fff") + ".json"), previousJson);
+            bool submitted = false;
+            try
+            {
+                await Task.Run(() => candidate.Activate());
+                submitted = true;
+                await Task.Delay(1150);
+                var active = DriverConfig.GetActive();
+                if (!Newtonsoft.Json.Linq.JToken.DeepEquals(Newtonsoft.Json.Linq.JToken.Parse(expected), active.ToJObject()))
+                    throw new ApplicationException("驱动回读与预览曲线不一致，已尝试恢复原设置。");
+                string temporary = settingsPath + ".curve-tmp";
+                File.WriteAllText(temporary, active.ToJSON());
+                if (File.Exists(settingsPath)) File.Replace(temporary, settingsPath, null);
+                else File.Move(temporary, settingsPath);
+                ActiveConfig = active;
+                UserConfig = DriverConfig.Convert(active.ToJSON()).Item1;
+                SetActiveHandles();
+            }
+            catch
+            {
+                if (submitted)
+                {
+                    await Task.Delay(1100);
+                    await Task.Run(() => previous.Activate());
+                }
+                throw;
+            }
+        }
 
         public void ResetDriver()
         {

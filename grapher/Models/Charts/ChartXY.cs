@@ -105,8 +105,8 @@ namespace grapher
 
             area.AxisX.RoundAxisValues();
 
-            area.AxisX.ScaleView.Zoomable = true;
-            area.AxisY.ScaleView.Zoomable = true;
+            area.AxisX.ScaleView.Zoomable = false;
+            area.AxisY.ScaleView.Zoomable = false;
 
             area.AxisY.ScaleView.MinSize = 0.01;
             area.AxisY.ScaleView.SmallScrollSize = 0.001;
@@ -119,8 +119,8 @@ namespace grapher
             area.CursorX.AutoScroll = true;
             area.CursorY.AutoScroll = true;
 
-            area.CursorX.IsUserSelectionEnabled = true;
-            area.CursorY.IsUserSelectionEnabled = true;
+            area.CursorX.IsUserSelectionEnabled = false;
+            area.CursorY.IsUserSelectionEnabled = false;
 
             area.CursorX.IsUserEnabled = true;
             area.CursorY.IsUserEnabled = true;

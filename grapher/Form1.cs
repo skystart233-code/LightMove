@@ -9,6 +9,8 @@ using System.IO;
 using grapher.Models.Serialized;
 using grapher.Models.Theming;
 using grapher.Common;
+using grapher.CurveEditing;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace grapher
 {
@@ -261,6 +263,41 @@ namespace grapher
                 LutApplyActiveXLabel,
                 LutApplyActiveYLabel);
 
+            var editorItem = new ToolStripMenuItem("拖点调曲线…", null, (s, e) => OpenCurveEditor())
+            {
+                Name = "CurveEditorMenuItem",
+                ShortcutKeys = Keys.Control | Keys.E,
+            };
+            menuStrip1.Items.Insert(0, editorItem);
+            var resetView = new ToolStripMenuItem("重置图表视图", null, (s, e) => ResetChartViews());
+            var zoom = new ToolStripMenuItem("允许框选缩放（拖动放大）") { CheckOnClick = true };
+            zoom.CheckedChanged += (s, e) =>
+            {
+                foreach (var chart in AllCharts())
+                {
+                    var area = chart.ChartAreas[0];
+                    area.AxisX.ScaleView.Zoomable = zoom.Checked;
+                    area.AxisY.ScaleView.Zoomable = zoom.Checked;
+                    area.CursorX.IsUserSelectionEnabled = zoom.Checked;
+                    area.CursorY.IsUserSelectionEnabled = zoom.Checked;
+                }
+                if (!zoom.Checked) ResetChartViews();
+            };
+            graphsToolStripMenuItem.DropDownItems.Insert(0, resetView);
+            graphsToolStripMenuItem.DropDownItems.Insert(1, zoom);
+            graphsToolStripMenuItem.DropDownItems.Insert(2, new ToolStripSeparator());
+            foreach (var chart in AllCharts())
+            {
+                var context = new ContextMenuStrip();
+                context.Items.Add("拖点调曲线…", null, (s, e) => OpenCurveEditor());
+                context.Items.Add("重置图表视图", null, (s, e) => ResetChartViews());
+                chart.ContextMenuStrip = context;
+            }
+            foreach (var item in new[] { editorItem, resetView, zoom })
+            {
+                item.BackColor = menuStrip1.BackColor;
+                item.ForeColor = menuStrip1.ForeColor;
+            }
         }
 
         #endregion Constructor
@@ -272,6 +309,31 @@ namespace grapher
         #endregion Properties
 
         #region Methods
+
+        private Chart[] AllCharts() => new[] { AccelerationChart, AccelerationChartY, VelocityChart, VelocityChartY, GainChart, GainChartY };
+
+        public void ResetChartViews()
+        {
+            foreach (var chart in AllCharts())
+            {
+                var area = chart.ChartAreas[0];
+                area.AxisX.ScaleView.ZoomReset(0); area.AxisY.ScaleView.ZoomReset(0);
+                area.CursorX.SelectionStart = area.CursorX.SelectionEnd = double.NaN;
+                area.CursorY.SelectionStart = area.CursorY.SelectionEnd = double.NaN;
+            }
+        }
+
+        public void OpenCurveEditor()
+        {
+            using (var editor = new CurveEditorForm(AccelGUI.Settings.ActiveProfile, async profile =>
+            {
+                await AccelGUI.Settings.ApplyGraphicalProfileAsync(profile);
+                AccelGUI.ApplyOptions.OptionSetX.Options.LutPanel.PointsTextBox.Clear();
+                AccelGUI.ApplyOptions.OptionSetY.Options.LutPanel.PointsTextBox.Clear();
+                AccelGUI.RefreshUser(); AccelGUI.RefreshActive(); ResetChartViews();
+            }, Path.Combine(Application.StartupPath, ".curve-editor.json")))
+                editor.ShowDialog(this);
+        }
 
         protected override void WndProc(ref Message m)
         {

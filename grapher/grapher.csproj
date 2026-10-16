@@ -101,6 +101,10 @@
     </Compile>
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Chinese.cs" />
+    <Compile Include="CurveEditing\CurveModel.cs" />
+    <Compile Include="CurveEditing\CurveProfile.cs" />
+    <Compile Include="CurveEditing\CurveCanvas.cs" />
+    <Compile Include="CurveEditing\CurveEditorForm.cs" />
     <Compile Include="Common\Helper.cs" />
     <Compile Include="DeviceMenuForm.cs">
       <SubType>Form</SubType>
