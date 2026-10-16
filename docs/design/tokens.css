@@ -1,0 +1,28 @@
+/* Hallmark · macrostructure: Workbench · genre: modern-minimal · theme: white native · anchor: blue
+ * pre-emit critique: P5 H5 E4 S5 R5 V4 · portable export; WinForms consumes LightTheme.cs.
+ * Native desktop UI: web navigation, marketing sections and mobile breakpoints are not applicable. */
+:root {
+  --color-page: oklch(97.0714% 0.002650 286.350);
+  --color-surface: oklch(100.0000% 0.000000 89.876);
+  --color-surface-alt: oklch(95.8234% 0.004147 271.369);
+  --color-ink: oklch(23.1576% 0.003805 286.099);
+  --color-secondary: oklch(46.4523% 0.015022 271.081);
+  --color-muted: oklch(51.6922% 0.014998 266.598);
+  --color-rule: oklch(91.4970% 0.007519 260.732);
+  --color-grid: oklch(96.3482% 0.004548 258.325);
+  --color-accent: oklch(52.1966% 0.177090 255.830);
+  --color-accent-soft: oklch(95.7472% 0.020508 254.913);
+  --color-accent-pressed: oklch(44.3802% 0.154135 256.448);
+  --color-accent-ink: oklch(100.0000% 0.000000 89.876);
+  --color-success: oklch(48.8419% 0.112729 154.655);
+  --color-live: oklch(54.8188% 0.194501 17.425);
+  --color-preview: oklch(53.2708% 0.116009 69.161);
+  --color-disabled: oklch(67.2229% 0.015820 264.462);
+  --color-baseline: oklch(64.0798% 0.020239 258.367);
+  --font-display: "Microsoft YaHei UI", system-ui, sans-serif;
+  --font-body: var(--font-display);
+  --space-xs: 4px; --space-sm: 8px; --space-md: 16px; --space-lg: 24px; --space-xl: 32px;
+  --text-sm: 12px; --text-body: 14px; --text-title: 28px;
+  --radius-control: 10px; --radius-surface: 12px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --dur-micro: 120ms;
+}

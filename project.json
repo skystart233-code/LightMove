@@ -1,0 +1,11 @@
+{
+  "name": "LightMove",
+  "displayName": "轻移 LightMove",
+  "version": "0.3.0-preview",
+  "tagline": "线性手感，稳、准、快。",
+  "platform": "Windows 10/11 x64",
+  "framework": ".NET Framework 4.7.2",
+  "upstream": "RawAccelOfficial/rawaccel",
+  "upstreamVersion": "v1.7.1",
+  "license": "MIT"
+}

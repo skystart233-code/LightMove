@@ -160,7 +160,10 @@ namespace grapher.Models.Serialized
             candidate.SetProfileAt(0, profile);
             var errors = candidate.Errors();
             if (errors != null) throw new ApplicationException(errors);
-            string expected = candidate.ToJSON();
+            // LUT entries are Single values. Parsing their JSON text promotes them
+            // to Double, so even an unchanged LUT can fail JToken.DeepEquals.
+            // Compare two wrapper objects directly, preserving exact field types.
+            var expected = candidate.ToJObject();
             string settingsPath = Path.Combine(Application.StartupPath, Constants.DefaultSettingsFileName);
             string backupDirectory = Path.Combine(Application.StartupPath, "curve-backups");
             Directory.CreateDirectory(backupDirectory);
@@ -172,7 +175,7 @@ namespace grapher.Models.Serialized
                 submitted = true;
                 await Task.Delay(1150);
                 var active = DriverConfig.GetActive();
-                if (!Newtonsoft.Json.Linq.JToken.DeepEquals(Newtonsoft.Json.Linq.JToken.Parse(expected), active.ToJObject()))
+                if (!Newtonsoft.Json.Linq.JToken.DeepEquals(expected, active.ToJObject()))
                     throw new ApplicationException("驱动回读与预览曲线不一致，已尝试恢复原设置。");
                 string temporary = settingsPath + ".curve-tmp";
                 File.WriteAllText(temporary, active.ToJSON());

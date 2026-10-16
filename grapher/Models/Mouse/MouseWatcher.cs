@@ -2,6 +2,7 @@
 using grapher.Models.Serialized;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -666,7 +667,7 @@ namespace grapher.Models.Mouse
             Header = 0x10000005
         }
 
-        [DllImport("user32.dll")]
+        [DllImport("user32.dll", SetLastError = true)]
         public static extern bool RegisterRawInputDevices([MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] RAWINPUTDEVICE[] pRawInputDevices, int uiNumDevices, int cbSize);
 
         /// <summary>
@@ -696,17 +697,10 @@ namespace grapher.Models.Mouse
             LastMoveDisplayFormat = Constants.MouseMoveDefaultFormat;
             LastMoveNormalized = false;
 
-            RAWINPUTDEVICE device = new RAWINPUTDEVICE();
-            device.WindowHandle = ContainingForm.Handle;
-            device.UsagePage = HIDUsagePage.Generic;
-            device.Usage = HIDUsage.Mouse;
-            device.Flags = RawInputDeviceFlags.InputSink | RawInputDeviceFlags.DevNotify;
-
-            RAWINPUTDEVICE[] devices = new RAWINPUTDEVICE[1];
-            devices[0] = device;
-            RegisterRawInputDevices(devices, 1, Marshal.SizeOf(typeof(RAWINPUTDEVICE)));
             Stopwatch = new Stopwatch();
             Stopwatch.Start();
+            InputReceiver = new MouseInputWindow(this);
+            containingForm.Disposed += (s, e) => InputReceiver.Dispose();
         }
 
         #endregion Constructors
@@ -722,6 +716,40 @@ namespace grapher.Models.Mouse
         private SettingsManager SettingsManager { get; }
 
         private MouseData MouseData { get; }
+        private MouseInputWindow InputReceiver { get; }
+        public IntPtr InputWindowHandle => InputReceiver.Handle;
+        public long InputMessageCount { get; private set; }
+        public long MotionSampleCount { get; private set; }
+        public DateTime LastInputUtc { get; private set; }
+        private DateTime lastDeviceRefreshUtc;
+
+        // A form's HWND may change when it is shown, scaled or closed as a dialog.
+        // Raw Input registration belongs to an HWND, not to the Form object. Keep
+        // its receiver independent of both the home and the legacy backend form.
+        private sealed class MouseInputWindow : NativeWindow, IDisposable
+        {
+            private readonly MouseWatcher watcher;
+            public MouseInputWindow(MouseWatcher watcher)
+            {
+                this.watcher = watcher;
+                CreateHandle(new CreateParams { Caption = "LightMove mouse input", Parent = new IntPtr(-3) });
+                var devices = new[] { new RAWINPUTDEVICE {
+                    WindowHandle = Handle, UsagePage = HIDUsagePage.Generic, Usage = HIDUsage.Mouse,
+                    Flags = RawInputDeviceFlags.InputSink | RawInputDeviceFlags.DevNotify } };
+                if (!RegisterRawInputDevices(devices, 1, Marshal.SizeOf(typeof(RAWINPUTDEVICE))))
+                {
+                    int error = Marshal.GetLastWin32Error(); DestroyHandle();
+                    throw new Win32Exception(error, "无法连接鼠标实时输入。");
+                }
+            }
+            protected override void WndProc(ref Message message)
+            {
+                if (message.Msg == 0x00ff) watcher.ReadMouseMove(message);
+                else if (message.Msg == 0x00fe) watcher.SettingsManager.OnDeviceChangeMessage();
+                base.WndProc(ref message);
+            }
+            public void Dispose() { if (Handle != IntPtr.Zero) DestroyHandle(); }
+        }
 
         private Stopwatch Stopwatch { get; }
 
@@ -748,11 +776,21 @@ namespace grapher.Models.Mouse
         {
             RawInput rawInput;
             int size = Marshal.SizeOf(typeof(RawInput));
-            _ = GetRawInputData(message.LParam, RawInputCommand.Input, out rawInput, ref size, Marshal.SizeOf(typeof(RAWINPUTHEADER)));
+            int bytes = GetRawInputData(message.LParam, RawInputCommand.Input, out rawInput, ref size, Marshal.SizeOf(typeof(RAWINPUTHEADER)));
+            if (bytes <= 0 || rawInput.Header.Type != RawInputType.Mouse) return;
+            InputMessageCount++; LastInputUtc = DateTime.UtcNow;
 
             bool relative = !rawInput.Data.Mouse.Flags.HasFlag(RawMouseFlags.MoveAbsolute);
 
             bool deviceMatch = false;
+            // Arrival notifications can precede complete device enumeration. Retry
+            // unknown handles at most once a second without admitting excluded mice.
+            if (!SettingsManager.ActiveNormTaggedHandles.Exists(d => d.Item1 == rawInput.Header.Device) &&
+                (LastInputUtc - lastDeviceRefreshUtc).TotalSeconds >= 1)
+            {
+                lastDeviceRefreshUtc = LastInputUtc;
+                SettingsManager.OnDeviceChangeMessage();
+            }
             foreach (var (handle, normalized) in SettingsManager.ActiveNormTaggedHandles)
             {
                 if (handle == rawInput.Header.Device)
@@ -801,6 +839,7 @@ namespace grapher.Models.Mouse
 
                 MouseData.Set(rawInput.Data.Mouse.LastX, rawInput.Data.Mouse.LastY);
                 AccelCharts.MakeDots(x, y, time);
+                MotionSampleCount++;
             }
 
         }

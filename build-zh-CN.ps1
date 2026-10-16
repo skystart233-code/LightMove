@@ -48,7 +48,8 @@ if (!(Test-Path -LiteralPath $refs)) {
 $arguments = @('/nologo', '/nostdlib+', '/target:winexe', '/platform:x64',
     '/langversion:7.3', '/codepage:65001', '/optimize+', '/deterministic+',
     ('/out:"' + (Join-Path $outputPath 'rawaccel.exe') + '"'),
-    ('/win32icon:"' + (Join-Path $PSScriptRoot 'grapher\mouse.ico') + '"'))
+    ('/win32icon:"' + (Join-Path $PSScriptRoot 'grapher\lightmove.ico') + '"'))
+$arguments += '/win32manifest:"' + (Join-Path $PSScriptRoot 'grapher\app.manifest') + '"'
 foreach ($name in @('mscorlib','System','System.Core','System.Windows.Forms','System.Windows.Forms.DataVisualization',
     'System.Drawing','System.Xml','System.Xml.Linq','System.Data','System.Data.DataSetExtensions',
     'Microsoft.CSharp','System.Deployment','System.Net.Http','System.Configuration')) {

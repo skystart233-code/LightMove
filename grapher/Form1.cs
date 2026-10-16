@@ -263,6 +263,10 @@ namespace grapher
                 LutApplyActiveXLabel,
                 LutApplyActiveYLabel);
 
+            // The modern home keeps this legacy window hidden. Enumerate current
+            // devices now instead of relying on a future plug/unplug notification.
+            AccelGUI.Settings.OnDeviceChangeMessage();
+
             var editorItem = new ToolStripMenuItem("拖点调曲线…", null, (s, e) => OpenCurveEditor())
             {
                 Name = "CurveEditorMenuItem",
@@ -325,25 +329,28 @@ namespace grapher
 
         public void OpenCurveEditor()
         {
-            using (var editor = new CurveEditorForm(AccelGUI.Settings.ActiveProfile, async profile =>
+            using (var editor = CreateCurveEditor()) editor.ShowDialog(this);
+        }
+
+        public CurveEditorForm CreateCurveEditor()
+        {
+            CurveEditorForm editor = null;
+            editor = new CurveEditorForm(AccelGUI.Settings.ActiveProfile, async profile =>
             {
                 await AccelGUI.Settings.ApplyGraphicalProfileAsync(profile);
                 AccelGUI.ApplyOptions.OptionSetX.Options.LutPanel.PointsTextBox.Clear();
                 AccelGUI.ApplyOptions.OptionSetY.Options.LutPanel.PointsTextBox.Clear();
                 AccelGUI.RefreshUser(); AccelGUI.RefreshActive(); ResetChartViews();
-            }, Path.Combine(Application.StartupPath, ".curve-editor.json")))
-                editor.ShowDialog(this);
+            }, Path.Combine(Application.StartupPath, ".curve-editor.json"),
+            () => AccelGUI.AccelCharts.GetLiveSample());
+            return editor;
         }
 
         protected override void WndProc(ref Message m)
         {
             if (!(AccelGUI is null))
             {
-                if (m.Msg == 0x00ff) // WM_INPUT
-                {
-                    AccelGUI.MouseWatcher.ReadMouseMove(m);
-                }
-                else if (m.Msg == 0x00fe) // WM_INPUT_DEVICE_CHANGE
+                if (m.Msg == 0x00fe) // WM_INPUT_DEVICE_CHANGE (legacy window notifications)
                 {
                     AccelGUI.Settings.OnDeviceChangeMessage();
                 }

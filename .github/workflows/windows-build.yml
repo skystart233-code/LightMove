@@ -1,0 +1,30 @@
+name: Windows build and checks
+on:
+  workflow_dispatch:
+  push:
+    branches: [zh-CN]
+    paths: ['grapher/**', 'tests/**', 'scripts/**', 'packaging/**', 'build-zh-CN.ps1', 'project.json', '.github/workflows/**']
+  pull_request:
+    paths: ['grapher/**', 'tests/**', 'scripts/**', 'packaging/**', 'build-zh-CN.ps1', 'project.json', '.github/workflows/**']
+permissions:
+  contents: read
+jobs:
+  desktop:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build and test with official dependencies
+        shell: powershell
+        run: |
+          $official = & .\scripts\get-official.ps1
+          & .\scripts\build.ps1 -OfficialDirectory $official
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LightMove-windows-x64
+          path: |
+            artifacts/LightMove/*.exe
+            artifacts/LightMove/*.sha256
+            artifacts/LightMove/app/*test-result.txt

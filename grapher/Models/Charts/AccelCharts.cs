@@ -5,6 +5,7 @@ using grapher.Models.Charts;
 using grapher.Models.Charts.ChartState;
 using System;
 using System.Windows.Forms;
+using grapher.Models.Mouse;
 
 namespace grapher
 {
@@ -26,6 +27,9 @@ namespace grapher
             var estimated = new EstimatedPoints();
             var estimatedX = new EstimatedPoints();
             var estimatedY = new EstimatedPoints();
+            LiveCombined = estimated;
+            LiveX = estimatedX;
+            LiveY = estimatedY;
             SetupCharts(sensitivityChart, velocityChart, gainChart, estimated, estimatedX, estimatedY);
             ChartStateManager = new ChartStateManager(
                 sensitivityChart,
@@ -56,6 +60,21 @@ namespace grapher
         #endregion Constructors
 
         #region Properties
+
+        private EstimatedPoints LiveCombined { get; }
+        private EstimatedPoints LiveX { get; }
+        private EstimatedPoints LiveY { get; }
+        private DateTime LastMotionUtc { get; set; }
+
+        public LiveMouseSample GetLiveSample()
+        {
+            if (LastMotionUtc == default(DateTime)) return null;
+            var x = ChartState.TwoDotsPerGraph ? LiveX : LiveCombined;
+            var y = ChartState.TwoDotsPerGraph ? LiveY : LiveCombined;
+            x.Sensitivity.Get(out var sx, out var mx);
+            y.Sensitivity.Get(out var sy, out var my);
+            return new LiveMouseSample { TimestampUtc = LastMotionUtc, SpeedX = sx[0], SpeedY = sy[0], MultiplierX = mx[0], MultiplierY = my[0] };
+        }
 
         public RawAcceleration ContainingForm { get; }
 
@@ -103,6 +122,7 @@ namespace grapher
         public void MakeDots(double x, double y, double timeInMs)
         {
             ChartState.MakeDots(x, y, timeInMs);
+            LastMotionUtc = DateTime.UtcNow;
         }
 
         public void DrawLastMovement()
