@@ -75,6 +75,29 @@ namespace grapher.CurveEditing
         }
     }
 
+    // Shared vertical rhythm for toolbars, form fields and footer actions.
+    // FlowLayoutPanel positions by top margins; controls of different native
+    // heights need a common centre line instead of per-control pixel offsets.
+    public class AlignedControlRow : FlowLayoutPanel
+    {
+        private bool arranging;
+        protected override void OnLayout(LayoutEventArgs e)
+        {
+            if (arranging) return;
+            arranging = true;
+            try
+            {
+                base.OnLayout(e);
+                if (WrapContents) return;
+                int available = Math.Max(0, ClientSize.Height - Padding.Vertical);
+                foreach (Control child in Controls)
+                    if (child.Visible)
+                        child.Top = Padding.Top + Math.Max(0, (available - child.Height) / 2);
+            }
+            finally { arranging = false; }
+        }
+    }
+
     public class EditorViewport : Panel
     {
         private bool arranging;

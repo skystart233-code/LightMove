@@ -4,6 +4,8 @@ artifacts/
 /README.publish-draft.md
 settings.json
 .curve-editor.json
+.curve-editor.json.comparison*
+.curve-editor.json.presets*
 .config
 curve-backups/
 live-input-*.json

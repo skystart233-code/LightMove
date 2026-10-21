@@ -22,6 +22,7 @@
   --font-display: "Microsoft YaHei UI", system-ui, sans-serif;
   --font-body: var(--font-display);
   --space-xs: 4px; --space-sm: 8px; --space-md: 16px; --space-lg: 24px; --space-xl: 32px;
+  --space-page-inset: 32px; --space-card-inset: 24px; --size-control: 40px;
   --text-sm: 12px; --text-body: 14px; --text-title: 28px;
   --radius-control: 10px; --radius-surface: 12px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --dur-micro: 120ms;

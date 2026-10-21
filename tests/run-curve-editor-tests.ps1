@@ -16,8 +16,13 @@ if ($sdk -notmatch '^(\S+) \[(.+)\]') { throw '.NET SDK required.' }
 $compiler = Join-Path $Matches[2] ($Matches[1] + '\Roslyn\bincore\csc.dll')
 & dotnet $compiler /noconfig ('@' + $response)
 if ($LASTEXITCODE -ne 0) { throw 'Test compilation failed.' }
+$resultPath=Join-Path $build 'curve-editor-test-result.txt'
+if(Test-Path -LiteralPath $resultPath) { Remove-Item -LiteralPath $resultPath }
 $process = Start-Process -FilePath (Join-Path $build 'CurveEditorTests.exe') -WorkingDirectory $build -WindowStyle Hidden -PassThru
-if (!$process.WaitForExit(60000)) { Stop-Process -Id $process.Id; throw 'Tests timed out.' }
+# Tall high-DPI rendering and preset dialog checks can exceed the original
+# minute on slower desktops. Keep each wait bounded and reject stale results.
+if (!$process.WaitForExit(60000) -and !$process.WaitForExit(60000)) { Stop-Process -Id $process.Id; throw 'Tests timed out.' }
+if(!(Test-Path -LiteralPath $resultPath)) { throw ('Tests exited without a result. Exit code: '+$process.ExitCode) }
 $result = Get-Content -LiteralPath (Join-Path $build 'curve-editor-test-result.txt') -Raw
 Write-Output $result
 if ($process.ExitCode -ne 0 -or !$result.StartsWith('PASS:')) { throw 'Curve editor tests failed.' }

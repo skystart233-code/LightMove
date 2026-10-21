@@ -17,7 +17,7 @@ foreach($name in @('wrapper.dll','Newtonsoft.Json.dll','writer.exe','installer.e
 Copy-Item -LiteralPath (Join-Path $app 'driver\rawaccel.sys') -Destination (Join-Path $stage 'driver\rawaccel.sys')
 Copy-Item -LiteralPath (Join-Path $repo 'README.zh-CN.md') -Destination (Join-Path $stage '使用说明.md')
 @'
-轻移 LightMove · 0.3.0 社区预览版
+轻移 LightMove · 0.4.0 社区预览版
 基于 RawAccelOfficial/rawaccel v1.7.1，使用官方原版驱动和封装库。
 上游：https://github.com/RawAccelOfficial/rawaccel
 汉化分支：https://github.com/skystart233-code/rawaccel/tree/zh-CN

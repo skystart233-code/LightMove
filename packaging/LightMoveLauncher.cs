@@ -13,8 +13,8 @@ using grapher.CurveEditing;
 
 [assembly: AssemblyTitle("轻移 LightMove")]
 [assembly: AssemblyDescription("轻移中文桌面体验版启动器，基于 Raw Accel")]
-[assembly: AssemblyVersion("0.3.0.0")]
-[assembly: AssemblyFileVersion("0.3.0.0")]
+[assembly: AssemblyVersion("0.4.0.0")]
+[assembly: AssemblyFileVersion("0.4.0.0")]
 
 internal static class LightMoveLauncher
 {
@@ -60,7 +60,7 @@ internal static class LightMoveLauncher
                         .OrderByDescending(Directory.GetLastWriteTimeUtc).FirstOrDefault() : null;
                     Extract(destination);
                     if (previous != null)
-                        foreach (var name in new[] { "settings.json", ".config", ".curve-editor.json" })
+                        foreach (var name in new[] { "settings.json", ".config", ".curve-editor.json", ".curve-editor.json.comparison", ".curve-editor.json.presets" })
                             if (File.Exists(Path.Combine(previous, name))) File.Copy(Path.Combine(previous, name), Path.Combine(destination, name), true);
                     File.WriteAllText(marker, hash);
                 }

@@ -336,6 +336,142 @@ internal static class CurveEditorTests
             Check(calls - before >= 361, "Dragging failed to invalidate curve cache");
         }
     }
+    private static void ComparisonTests()
+    {
+        string path = statePath + ".compare";
+        if (File.Exists(path + ".comparison")) File.Delete(path + ".comparison");
+        var tuned = Natural(); tuned.rotation = 9; tuned.yxOutputDPIRatio = 1.2;
+        var y = tuned.argsY; y.limit = 2.4; tuned.argsY = y;
+        string signature = CurveProfile.Signature(tuned);
+        Profile active = CurveProfile.Copy(tuned); int calls = 0;
+        var gate = new TaskCompletionSource<bool>(); bool delay = false, fail = false;
+        Func<Profile,Task> callback = async p => { calls++; if (delay) await gate.Task; if (fail) throw new IOException("测试：驱动未确认"); active = CurveProfile.Copy(p); };
+        using (var form = new CurveEditorForm(tuned,callback,path))
+        {
+            Show(form);
+            var control = (FeelSwitch)form.Controls.Find("FeelComparisonSwitch",true).Single();
+            var canvas = Field<CurveCanvas>(form,"canvas");
+            Check(control.Checked && control.Width >= 280 && control.Height >= 64,"Comparison switch is not prominent / initially on");
+            Check(control.Parent.Parent.Name=="LiveFeelCard","Comparison switch is not grouped with live feedback");
+            Drag(canvas,2,12,1.5);
+            string draft = CurveProfile.Signature(form.PreviewProfile());
+            // Keep a pending preview while exercising the real asynchronous UI path.
+            delay = true; var off = form.ToggleComparisonAsync();
+            Check(!form.Enabled && control.Busy,"Switch does not show its busy state");
+            var duplicate = form.ToggleComparisonAsync();
+            Check(calls == 1 && duplicate.IsCompleted,"Fast repeated toggle submitted a second driver write");
+            gate.SetResult(true); Pump(()=>off.IsCompleted && form.Enabled); delay = false;
+            Check(!control.Checked && !control.Busy,"Switch did not enter original-speed state");
+            var neutral = new ManagedAccel(active);
+            foreach(double speed in new[] { 1.0, 10, 60, 500 })
+            {
+                var result = neutral.Accelerate((int)(speed*1000),(int)(speed*1000),1,1000);
+                Check(Math.Abs(result.Item1-speed*1000)<.001 && Math.Abs(result.Item2-speed*1000)<.001,"Neutral profile still accelerates / rotates / scales");
+            }
+            Check(CurveProfile.Signature(form.PreviewProfile()) == draft && Field<Button>(form,"apply").Enabled,"Comparison changed pending preview");
+            Check(File.Exists(path+".comparison"),"Off state has no durable return path");
+            var now=DateTime.UtcNow; form.UpdateLiveSample(new LiveMouseSample { TimestampUtc=now,SpeedX=20,SpeedY=40 },now);
+            Check(canvas.LiveMoving && Math.Abs(canvas.LiveAppliedMultiplier-1)<.00001,"Red marker is not on neutral 1x curve");
+            Check(canvas.AppliedPoints.All(p=>Math.Abs(p.Y-1)<.00001),"Reference diamonds do not show neutral curve");
+            Snapshot(form,"comparison-off-preview.png");
+            // Reopen while paused: retain exact asymmetric profile AND saved control points.
+            using(var reopened = new CurveEditorForm(active,callback,path))
+            {
+                Show(reopened); Check(!((FeelSwitch)reopened.Controls.Find("FeelComparisonSwitch",true).Single()).Checked,"Restart forgot paused state");
+                Check(CurveProfile.Signature(Field<Profile>(reopened,"source"))==signature,"Restart lost the tuned asymmetric profile");
+            }
+            fail = true; var failed = form.ToggleComparisonAsync(); Pump(()=>failed.IsCompleted && form.Enabled);
+            Check(!control.Checked && control.Error != null && File.Exists(path+".comparison"),"Failed resume discarded recovery / claims enabled");
+            Snapshot(form,"comparison-error.png");
+            fail = false; var on = form.ToggleComparisonAsync(); Pump(()=>on.IsCompleted && form.Enabled);
+            Check(control.Checked && control.Error == null && CurveProfile.Signature(active)==signature,"Resume did not restore exact full profile");
+            Check(CurveProfile.Signature(form.PreviewProfile())==draft && !File.Exists(path+".comparison"),"Resume changed draft / left journal");
+            form.UndoCurve(); Check(!Field<Button>(form,"apply").Enabled,"Comparison broke undo history");
+            form.RedoCurve(); Check(CurveProfile.Signature(form.PreviewProfile())==draft,"Comparison broke redo history");
+            var pause = form.ToggleComparisonAsync(); Pump(()=>pause.IsCompleted && form.Enabled);
+            Field<Button>(form,"apply").PerformClick(); Pump(()=>form.Enabled && !Field<Button>(form,"apply").Enabled);
+            Check(control.Checked && CurveProfile.Signature(active)==draft,"Apply while paused did not enable the new curve");
+            Snapshot(form,"comparison-on.png");
+            var pausedAgain=form.ToggleComparisonAsync(); Pump(()=>pausedAgain.IsCompleted && form.Enabled);
+            using(var reopened=new CurveEditorForm(active,callback,path))
+            {
+                Show(reopened);
+                Check(!((FeelSwitch)reopened.Controls.Find("FeelComparisonSwitch",true).Single()).Checked,"Saved LUT restart forgot comparison state");
+                Check(Math.Abs(Field<CurveCanvas>(reopened,"canvas").Model.Points[2].X-12)<.2,"Paused restart lost saved control points");
+                var resume=reopened.ToggleComparisonAsync(); Pump(()=>resume.IsCompleted && reopened.Enabled);
+                Check(CurveProfile.Signature(active)==draft,"Paused restart could not restore saved LUT exactly");
+            }
+        }
+        string recovery = path+".recovery"; if(File.Exists(recovery)) File.Delete(recovery);
+        var comparison = new FeelComparison(tuned,recovery);
+        bool rejected=false;
+        try { comparison.ToggleAsync(p=>{throw new IOException("reject");}).GetAwaiter().GetResult(); } catch(IOException) { rejected=true; }
+        Check(rejected && !comparison.Paused,"Failed pause reports success");
+        Check(!new FeelComparison(tuned,recovery).Paused,"Failed pause is restored as paused when driver remains enabled");
+        File.WriteAllText(recovery,"broken json"); var broken=new FeelComparison(tuned,recovery);
+        Check(broken.RecoveryError!=null && CurveProfile.Signature(broken.EnabledProfile)==signature,"Corrupt backup silently replaces active curve");
+        broken.Applied(tuned); Check(!File.Exists(recovery),"Applying valid curve does not repair corrupt comparison state");
+        string blocked = Path.Combine(path+".missing-parent","journal");
+        bool submitted = false; rejected=false;
+        try { new FeelComparison(tuned,blocked).ToggleAsync(p=>{submitted=true;return Task.FromResult(0);}).GetAwaiter().GetResult(); } catch(IOException) { rejected=true; }
+        Check(rejected && !submitted,"Driver paused before its return path was saved");
+    }
+    private static void UserPresetTests()
+    {
+        string path=statePath+".user-presets";
+        if(File.Exists(path))File.Delete(path);
+        var store=new UserPresetStore(path);
+        Check(store.Items.Count==0,"Missing user presets is not an empty collection");
+        int calls=0;
+        using(var form=new CurveEditorForm(Natural(),p=>{calls++;return Task.FromResult(0);},statePath+".user-preset-editor"))
+        {
+            Show(form);var canvas=Field<CurveCanvas>(form,"canvas");
+            Check(canvas.Plot.Height/canvas.Plot.Width>=.20 && canvas.Plot.Height/canvas.Plot.Width<=.55,"Default curve editor lost the first release's moderate proportions");
+            var viewport=(Panel)form.Controls.Find("ContentViewport",true).Single();
+            Check(viewport.VerticalScroll.Visible,"Tall curve editor does not scroll");
+            Drag(canvas,2,12,1.6);var preset=form.CaptureUserPreset();preset.Name="办公精调";
+            var saved=store.Add(preset);preset.X[2].Y=9;
+            Check(Math.Abs(store.Items[0].X[2].Y-1.6)<.01,"Preset storage shares mutable editor points");
+            var second=store.Add(saved);
+            Check(second.Name!=saved.Name && store.Items.Count==2,"Same-name save overwrites a preset");
+            store=new UserPresetStore(path);
+            Check(store.Items.Count==2 && store.Items.Any(p=>p.Id==saved.Id),"Saved presets do not survive reopening");
+            var removed=store.Delete(saved.Id);store.Restore(removed);
+            Check(new UserPresetStore(path).Items.Any(p=>p.Id==saved.Id),"Undo preset deletion did not persist");
+            form.UndoCurve();Check(!Field<Button>(form,"apply").Enabled,"Undo before preset load failed");
+            form.LoadUserPreset(saved);
+            Check(calls==0 && Field<Button>(form,"apply").Enabled && Math.Abs(canvas.Model.Points[2].Y-1.6)<.01,"Loading preset applies driver / loses curve");
+            form.UndoCurve();Check(!Field<Button>(form,"apply").Enabled,"Loading a preset is not undoable");
+            form.RedoCurve();Check(Math.Abs(canvas.Model.Points[2].Y-1.6)<.01,"Redo preset load lost curve");
+            var asymmetric=saved.Copy();asymmetric.Linked=false;asymmetric.Y[2].Y=2.3;
+            form.LoadUserPreset(asymmetric);var preview=form.PreviewProfile();
+            Check(!Field<CheckBox>(form,"sync").Checked && Math.Abs(CurveProfile.Sampler(preview.argsY)(12)-2.3)<.001,"Preset load lost separate Y curve");
+            string before=File.ReadAllText(path);var invalid=saved.Copy();invalid.Name=" ";bool rejected=false;
+            try{store.Add(invalid);}catch(ArgumentException){rejected=true;}
+            Check(rejected && File.ReadAllText(path)==before,"Invalid preset save changed the file");
+            using(var manager=new UserPresetsForm(store,form.CaptureUserPreset))
+            {
+                Show(manager);CheckTextFits(manager);
+                var name=(TextBox)manager.Controls.Find("PresetName",true).Single();name.Text="游戏手感";
+                ((Button)manager.Controls.Find("SaveUserPreset",true).Single()).PerformClick();
+                Check(store.Items.Count==3 && store.Items.Any(p=>p.Name=="游戏手感"),"Preset manager cannot save current preview");
+                var delete=Descendants(manager).OfType<Button>().Single(b=>b.Text=="删除");delete.PerformClick();
+                Check(store.Items.Count==2,"Preset manager cannot delete");
+                Descendants(manager).OfType<Button>().Single(b=>b.Text=="撤回删除").PerformClick();
+                Check(store.Items.Count==3,"Preset manager cannot undo deletion");
+                Snapshot(manager,"lightmove-user-presets.png");
+                ((Button)manager.Controls.Find("LoadUserPreset",true).Single()).PerformClick();
+                Check(manager.SelectedPreset!=null && calls==0,"Preset manager failed to return a preview without writing driver");
+            }
+            var unavailable=new UserPresetStore(Path.Combine(path+".missing-directory","presets.json"));
+            bool failed=false;try{unavailable.Add(saved);}catch(IOException){failed=true;}
+            Check(failed && unavailable.Items.Count==0,"Failed save changed in-memory preset list");
+        }
+        File.WriteAllText(path,"broken-json");bool corrupt=false;
+        try{new UserPresetStore(path);}catch(Newtonsoft.Json.JsonException){corrupt=true;}
+        Check(corrupt && File.ReadAllText(path)=="broken-json","Corrupt preset file was overwritten");
+        File.Delete(path);
+    }
     private static void EditorTests()
     {
         int applied = 0; Profile last = null;
@@ -580,8 +716,44 @@ internal static class CurveEditorTests
         try
         {
             System.Globalization.CultureInfo.DefaultThreadCurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException);
             Application.EnableVisualStyles(); Application.SetCompatibleTextRenderingDefault(false);
-            if (Array.IndexOf(args, "--render-demo") >= 0)
+            if (Array.IndexOf(args,"--live-comparison-roundtrip")>=0)
+            {
+                var before=DriverConfig.GetActive(); string beforeJson=before.ToJSON();
+                File.WriteAllText("live-comparison-before.json",beforeJson);
+                File.WriteAllText("settings.json",beforeJson);
+                try
+                {
+                    using(var backend=new RawAcceleration())
+                    {
+                        Thread.Sleep(1250); Application.DoEvents();
+                        string journal=Path.Combine(Environment.CurrentDirectory,"live-comparison-recovery.json");
+                        var comparison=new FeelComparison(before.profiles[0],journal);
+                        var off=comparison.ToggleAsync(backend.AccelGUI.Settings.ApplyGraphicalProfileAsync);
+                        Pump(()=>off.IsCompleted); off.GetAwaiter().GetResult();
+                        var expected=DriverConfig.Convert(beforeJson).Item1;
+                        expected.SetProfileAt(0,FeelComparison.Neutral(before.profiles[0]));
+                        Check(Newtonsoft.Json.Linq.JToken.DeepEquals(expected.ToJObject(),DriverConfig.GetActive().ToJObject()),"Live comparison did not apply neutral profile / changed other config");
+                        var recovered=new FeelComparison(DriverConfig.GetActive().profiles[0],journal);
+                        Check(recovered.Paused,"Live paused profile did not recover after restart");
+                        var on=recovered.ToggleAsync(backend.AccelGUI.Settings.ApplyGraphicalProfileAsync);
+                        Pump(()=>on.IsCompleted); on.GetAwaiter().GetResult();
+                        Check(Newtonsoft.Json.Linq.JToken.DeepEquals(before.ToJObject(),DriverConfig.GetActive().ToJObject()),"Live comparison did not restore exact full config");
+                        var saved=DriverConfig.Convert(File.ReadAllText("settings.json")).Item1;
+                        Check(Newtonsoft.Json.Linq.JToken.DeepEquals(before.ToJObject(),saved.ToJObject()),"Live comparison did not save restored configuration");
+                    }
+                    File.WriteAllText("live-comparison-result.txt","PASS: neutral driver write/readback, recovery after restart, exact full config restore and settings save. No changes to device config.");
+                    return 0;
+                }
+                finally
+                {
+                    Thread.Sleep(1200); before.Activate(); Thread.Sleep(1200);
+                    Check(Newtonsoft.Json.Linq.JToken.DeepEquals(before.ToJObject(),DriverConfig.GetActive().ToJObject()),"Live comparison rollback failed");
+                    File.WriteAllText("settings.json",beforeJson);
+                }
+            }
+            if (Array.IndexOf(args, "--render-demo") >= 0 || Array.IndexOf(args,"--render-full-layout")>=0)
             {
                 Directory.CreateDirectory("demo-frames");
                 LiveMouseSample sample = null;
@@ -589,6 +761,20 @@ internal static class CurveEditorTests
                 {
                     Show(form); form.Text = "轻移 LightMove · 交互演示（模拟鼠标输入）";
                     form.GetType().GetMethod("SetPreset", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(form, new object[] { 1.8 });
+                    if(Array.IndexOf(args,"--render-full-layout")>=0 || Array.IndexOf(args,"--full-layout")>=0)
+                    {
+                        var content=form.Controls.Find("EditorContent",true).Single();
+                        var footer=form.Controls.Find("EditorActions",true).Single();
+                        var chrome=form.Controls.Find("WindowChrome",true).Single();
+                        for(int pass=0;pass<3;pass++)
+                        {form.ClientSize=new Size(form.ClientSize.Width,content.MinimumSize.Height+footer.Height+chrome.Height);Application.DoEvents();}
+                        var now=DateTime.UtcNow;form.UpdateLiveSample(new LiveMouseSample {TimestampUtc=now,SpeedX=20,SpeedY=20},now);
+                        Snapshot(form,"lightmove-publish-workspace.png");
+                        var canvas=Field<CurveCanvas>(form,"canvas");
+                        using(var bitmap=new Bitmap(canvas.Width,canvas.Height))
+                        {canvas.DrawToBitmap(bitmap,new Rectangle(Point.Empty,canvas.Size));bitmap.Save("lightmove-publish-curve.png");}
+                        if(Array.IndexOf(args,"--render-demo")<0)return 0;
+                    }
                     for (int i = 0; i < 32; i++)
                     {
                         double speed = i < 16 ? i * 4 : (31 - i) * 4;
@@ -662,7 +848,11 @@ internal static class CurveEditorTests
             statePath = Path.Combine(Environment.CurrentDirectory, "test-editor-state.json");
             if(Array.IndexOf(args,"--chrome-only")>=0) { WindowChromeTests(); File.WriteAllText("chrome-result.txt","PASS: "+checks); return 0; }
             if (File.Exists(statePath)) File.Delete(statePath);
-            ModelTests(); SnapTests(); EditorTests(); HistoryTests(); LightThemeTests(); WindowChromeTests(); AppliedPointTests(); DesktopTests();
+            File.WriteAllText("test-progress.txt",DateTime.UtcNow.ToString("O")+" start\n");
+            Action<string,Action> run=(name,test)=>{test();File.AppendAllText("test-progress.txt",DateTime.UtcNow.ToString("O")+" "+name+"\n");};
+            run("model",ModelTests);run("snap",SnapTests);run("editor",EditorTests);run("history",HistoryTests);
+            run("theme",LightThemeTests);run("chrome",WindowChromeTests);run("reference",AppliedPointTests);
+            run("desktop",DesktopTests);run("comparison",ComparisonTests);run("presets",UserPresetTests);
             File.WriteAllText("curve-editor-test-result.txt", "PASS: " + checks + " checks. Native LUT parity, capped tail, maximum points, drag/add/delete, fixed view, preview-only, apply/restore callbacks, per-axis preservation, control-point reload. No live driver writes.");
             return 0;
         }

@@ -1,5 +1,13 @@
 # Local desktop checks
 
+User-preset checks cover persistence across reopening, point-copy isolation, same-name numbering, separate axes, preview-only loading and undo/redo, deleting/restoring, save failures and retaining corrupt files. Layout checks retain the first release's moderate plot proportions and keep a fixed footer while short windows scroll.
+
+The feel comparison checks cover exact full-profile resume, neutral native output in both axes, concurrent click rejection, pending preview and undo preservation, driver failure and retry, journal failure before activation, corrupted recovery, and saved LUT control points after a paused restart. They use offline callbacks by default.
+
+`render-feel-switch.ps1 -BuildDirectory <build-folder>` creates an offline native eight-state sheet (default, hover, focus, pressed, disabled, loading, error and success) as `feel-switch-states.png`; it does not touch the driver.
+
+With explicit authorization, `CurveEditorTests.exe --live-comparison-roundtrip` temporarily submits a neutral profile, verifies typed driver readback, reopens recovery state and restores the exact starting configuration and settings in a finally block. The starting config is retained in `live-comparison-before.json`. This mode is excluded from the default test script.
+
 Build the application using `build-zh-CN.ps1`, then pass its output folder to:
 
 ```powershell

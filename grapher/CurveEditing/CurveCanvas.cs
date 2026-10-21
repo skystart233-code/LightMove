@@ -75,9 +75,9 @@ namespace grapher.CurveEditing
             get
             {
                 float scale = paintingLogical ? 1 : DisplayScale;
-                return new RectangleF(65 * scale, 40 * scale,
-                    Math.Max(40 * scale, (paintingLogical ? Width / DisplayScale : Width) - 92 * scale),
-                    Math.Max(40 * scale, (paintingLogical ? Height / DisplayScale : Height) - 145 * scale));
+                return new RectangleF(72 * scale, 40 * scale,
+                    Math.Max(40 * scale, (paintingLogical ? Width / DisplayScale : Width) - 96 * scale),
+                    Math.Max(40 * scale, (paintingLogical ? Height / DisplayScale : Height) - 152 * scale));
             }
         }
         public PointF Pixel(double x, double y)
@@ -253,12 +253,12 @@ namespace grapher.CurveEditing
                     g.DrawString(text, tickFont, labels, r.Left - g.MeasureString(text, tickFont).Width - 10, y - 9);
                 }
                 const string axis = "鼠标移动速度  /  向右越快 →";
-                g.DrawString(axis, tickFont, labels, r.Left + (r.Width - g.MeasureString(axis, tickFont).Width) / 2, r.Bottom + 34);
-                g.DrawString("光标倍率", tickFont, labels, 9, 17);
+                g.DrawString(axis, tickFont, labels, r.Left + (r.Width - g.MeasureString(axis, tickFont).Width) / 2, r.Bottom + 32);
+                g.DrawString("光标倍率", tickFont, labels, LightTheme.CardInset, 16);
                 g.DrawString("慢移 · 精细定位", tickFont, labels, r.Left + 10, r.Top - 27);
                 g.DrawString("正常移动", tickFont, labels, r.Left + r.Width * .36f, r.Top - 27);
                 g.DrawString("快移 · 轻松跨屏", tickFont, labels, r.Left + r.Width * .73f, r.Top - 27);
-                float legendX = r.Left, legendY = r.Bottom + 63;
+                float legendX = LightTheme.CardInset, legendY = r.Bottom + 64;
                 foreach (var item in new[] { new { Text = "已生效曲线 · 只读", Color = LightTheme.Baseline, Kind = 0 },
                     new { Text = "待应用曲线 · 可拖动", Color = LightTheme.Accent, Kind = 1 },
                     new { Text = "实时位置", Color = LightTheme.Live, Kind = 2 },
@@ -281,7 +281,7 @@ namespace grapher.CurveEditing
                     legendX += g.MeasureString(item.Text, tickFont).Width + 49;
                 }
                 g.DrawString("灰线与灰色菱形是当前设置，仅供对照。拖动蓝点只预览，点击「应用曲线」才生效。",
-                    tickFont, labels, r.Left, r.Bottom + 83);
+                    tickFont, labels, LightTheme.CardInset, r.Bottom + 88);
             }
             if (Model == null) return;
             var state = g.Save(); g.SetClip(r);

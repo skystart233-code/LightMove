@@ -25,6 +25,7 @@ namespace grapher.CurveEditing
         public static readonly Color Disabled = Color.FromArgb(145, 150, 160);
         public static readonly Color Baseline = Color.FromArgb(133, 141, 153);
         public const int SpaceSmall = 8, SpaceMedium = 16, SpaceLarge = 24;
+        public const int PageInset = 32, CardInset = 24, ControlHeight = 40;
         public const float Radius = 12;
     }
 }

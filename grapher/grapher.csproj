@@ -106,6 +106,10 @@
     <Compile Include="CurveEditing\CurveProfile.cs" />
     <Compile Include="CurveEditing\CurveCanvas.cs" />
     <Compile Include="CurveEditing\CurveEditorForm.cs" />
+    <Compile Include="CurveEditing\FeelComparison.cs" />
+    <Compile Include="CurveEditing\FeelSwitch.cs" />
+    <Compile Include="CurveEditing\UserPresets.cs" />
+    <Compile Include="CurveEditing\UserPresetsForm.cs" />
     <Compile Include="CurveEditing\ModernWindow.cs" />
     <Compile Include="CurveEditing\LightTheme.cs" />
     <Compile Include="CurveEditing\WindowChrome.cs" />
