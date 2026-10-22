@@ -1,4 +1,4 @@
-param([string]$BuildDirectory = (Join-Path (Split-Path $PSScriptRoot -Parent) 'artifacts\RawAccel-zh-CN'))
+param([string]$BuildDirectory = (Join-Path (Split-Path $PSScriptRoot -Parent) 'artifacts\RawAccel-zh-CN'), [string]$TestArguments)
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path $PSScriptRoot -Parent
 $build = (Resolve-Path -LiteralPath $BuildDirectory).Path
@@ -8,7 +8,8 @@ $arguments = $references + @('/nologo', '/target:exe', '/platform:x64', '/langve
     ('/win32manifest:"' + (Join-Path $repo 'grapher\app.manifest') + '"'),
     ('/out:"' + (Join-Path $build 'CurveEditorTests.exe') + '"'),
     ('/reference:"' + (Join-Path $build 'rawaccel.exe') + '"'),
-    ('"' + (Join-Path $PSScriptRoot 'CurveEditorTests.cs') + '"'))
+    ('"' + (Join-Path $PSScriptRoot 'CurveEditorTests.cs') + '"'),
+    ('"' + (Join-Path $PSScriptRoot 'CursorLocatorTests.cs') + '"'))
 $response = Join-Path $build 'test-compile.rsp'
 $arguments | Set-Content -LiteralPath $response -Encoding UTF8
 $sdk = @(& dotnet --list-sdks)[-1]
@@ -18,7 +19,9 @@ $compiler = Join-Path $Matches[2] ($Matches[1] + '\Roslyn\bincore\csc.dll')
 if ($LASTEXITCODE -ne 0) { throw 'Test compilation failed.' }
 $resultPath=Join-Path $build 'curve-editor-test-result.txt'
 if(Test-Path -LiteralPath $resultPath) { Remove-Item -LiteralPath $resultPath }
-$process = Start-Process -FilePath (Join-Path $build 'CurveEditorTests.exe') -WorkingDirectory $build -WindowStyle Hidden -PassThru
+$launch=@{FilePath=(Join-Path $build 'CurveEditorTests.exe');WorkingDirectory=$build;WindowStyle='Hidden';PassThru=$true}
+if($TestArguments) { $launch.ArgumentList=$TestArguments }
+$process = Start-Process @launch
 # Tall high-DPI rendering and preset dialog checks can exceed the original
 # minute on slower desktops. Keep each wait bounded and reject stale results.
 if (!$process.WaitForExit(60000) -and !$process.WaitForExit(60000)) { Stop-Process -Id $process.Id; throw 'Tests timed out.' }

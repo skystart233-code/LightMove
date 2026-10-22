@@ -25,6 +25,8 @@ namespace grapher.CurveEditing
         private readonly string statePath;
         private readonly FeelComparison comparison;
         private readonly FeelSwitch feelSwitch;
+        private readonly StudioCheckBox shakeCursorSwitch;
+        private readonly Label shakeCursorDescription;
         private CurveModel[] curves;
         private CurveModel[] initial;
         private readonly CurveCanvas canvas;
@@ -60,6 +62,9 @@ namespace grapher.CurveEditing
         private Action reserveCanvasSpace;
         private bool[] changed = new bool[2];
         public event EventHandler DesktopSettingsRequested;
+        public event EventHandler ShakeCursorToggleRequested;
+        public bool ShakeCursorEnabled => shakeCursorSwitch.Checked;
+        private const string ShakeCursorHelp="快速来回摇晃，指针放大约 3 倍；停下恢复，拖拽时不触发。与手感开关独立。";
 
         public CurveEditorForm(Profile profile, Func<Profile, Task> applyProfile, string statePath,
             Func<LiveMouseSample> liveProvider = null)
@@ -94,7 +99,7 @@ namespace grapher.CurveEditing
 
             var viewport = new EditorViewport { Name = "ContentViewport", Dock = DockStyle.Fill };
             var layout = new TableLayoutPanel { Name = "EditorContent", Dock = DockStyle.Fill, MinimumSize = new Size(920, 800), Padding = new Padding(LightTheme.PageInset, 24, LightTheme.PageInset, 12), ColumnCount = 1, RowCount = 8 };
-            foreach (var height in new float[] { 80, 0, 128, 64, 0, 64, 32, 28 })
+            foreach (var height in new float[] { 80, 0, 224, 64, 0, 64, 32, 28 })
                 layout.RowStyles.Add(height == 0 ? new RowStyle(SizeType.Percent, 100) : new RowStyle(SizeType.Absolute, height));
             layout.RowStyles[1] = new RowStyle(SizeType.Absolute, 0);
             viewport.Controls.Add(layout); Controls.Add(viewport);
@@ -118,7 +123,7 @@ namespace grapher.CurveEditing
             var help = ButtonFor("使用指南", 96); help.Name = "ToggleGuide";
             help.BackColor = LightTheme.Page; help.ForeColor = LightTheme.Accent;
             headerActions.Controls.Add(help);
-            var desktop=ButtonFor("启动设置",96); desktop.Name="DesktopSettings";
+            var desktop=ButtonFor("偏好设置",96); desktop.Name="DesktopSettings";
             desktop.BackColor=LightTheme.Page; desktop.ForeColor=LightTheme.Accent;
             desktop.Click+=(s,e)=>DesktopSettingsRequested?.Invoke(this,EventArgs.Empty);
             headerActions.Controls.Add(desktop); heading.Controls.Add(headerActions,1,0);
@@ -150,7 +155,22 @@ namespace grapher.CurveEditing
             liveLayout.Controls.Add(liveState, 0, 2); liveLayout.Controls.Add(liveNumbers, 1, 1); liveLayout.Controls.Add(previewNumbers, 2, 1);
             editState.Margin = new Padding(0,4,0,0); editState.Font = new Font(Font.FontFamily, 9);
             liveLayout.Controls.Add(editState, 1, 2); liveLayout.SetColumnSpan(editState, 2);
-            liveCard.Controls.Add(liveLayout); layout.Controls.Add(liveCard, 0, 2);
+            liveCard.Controls.Add(liveLayout);
+            var liveSection=new TableLayoutPanel {Name="LiveAndPointerSettings",Dock=DockStyle.Fill,ColumnCount=1,RowCount=2,Margin=Padding.Empty};
+            liveSection.RowStyles.Add(new RowStyle(SizeType.Absolute,128));
+            liveSection.RowStyles.Add(new RowStyle(SizeType.Absolute,96));
+            liveSection.Controls.Add(liveCard,0,0);
+            var pointerCard=new RoundedCard {Name="ShakeCursorCard",Dock=DockStyle.Fill,Margin=new Padding(0,0,0,16),Padding=new Padding(LightTheme.CardInset,12,LightTheme.CardInset,12)};
+            var pointerLayout=new TableLayoutPanel {Dock=DockStyle.Fill,ColumnCount=2,RowCount=2,Margin=Padding.Empty,BackColor=LightTheme.Surface};
+            pointerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent,100));pointerLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute,108));
+            pointerLayout.RowStyles.Add(new RowStyle(SizeType.Absolute,26));pointerLayout.RowStyles.Add(new RowStyle(SizeType.Percent,100));
+            pointerLayout.Controls.Add(new Label {Name="ShakeCursorTitle",Text="摇晃放大指针",Dock=DockStyle.Fill,Margin=Padding.Empty,TextAlign=ContentAlignment.MiddleLeft,Font=new Font(Font.FontFamily,11,FontStyle.Bold)},0,0);
+            shakeCursorDescription=new Label {Name="ShakeCursorDescription",Text=ShakeCursorHelp,Dock=DockStyle.Fill,Margin=Padding.Empty,TextAlign=ContentAlignment.MiddleLeft,ForeColor=LightTheme.Secondary,Font=new Font(Font.FontFamily,9)};
+            pointerLayout.Controls.Add(shakeCursorDescription,0,1);
+            shakeCursorSwitch=new StudioCheckBox {Name="ShakeCursorSwitch",Text="已开启",Checked=true,AutoCheck=false,AutoSize=false,Dock=DockStyle.Fill,Margin=new Padding(16,0,0,0),Cursor=Cursors.Hand,AccessibleName="摇晃放大指针开关",AccessibleDescription=ShakeCursorHelp};
+            shakeCursorSwitch.Click+=(s,e)=>ShakeCursorToggleRequested?.Invoke(this,EventArgs.Empty);
+            pointerLayout.Controls.Add(shakeCursorSwitch,1,0);pointerLayout.SetRowSpan(shakeCursorSwitch,2);
+            pointerCard.Controls.Add(pointerLayout);liveSection.Controls.Add(pointerCard,0,1);layout.Controls.Add(liveSection,0,2);
 
             var toolbar = Flow(); toolbar.Name = "PresetToolbar"; toolbar.Padding = new Padding(0,0,0,16);
             toolbar.Controls.Add(LabelFor("预设"));
@@ -292,6 +312,13 @@ namespace grapher.CurveEditing
             Shown+=(s,e)=>reserveCanvasSpace();
             ResumeLayout(true);
             reserveCanvasSpace();
+        }
+        public void SetShakeCursorState(bool enabled,string message=null)
+        {
+            shakeCursorSwitch.Checked=enabled;shakeCursorSwitch.Text=enabled ? "已开启" : "已关闭";
+            shakeCursorDescription.Text=message ?? ShakeCursorHelp;
+            shakeCursorDescription.ForeColor=message==null ? LightTheme.Secondary : LightTheme.Live;
+            shakeCursorSwitch.Invalidate();
         }
         public UserCurvePreset CaptureUserPreset()
         {

@@ -15,6 +15,8 @@ namespace grapher
             // Windows Run entries do not provide a working directory. Upstream
             // settings readers use relative paths, so anchor them before loading.
             System.IO.Directory.SetCurrentDirectory(Application.StartupPath);
+            if(args.Length>0 && args[0]=="--cursor-recovery")
+            {Desktop.CursorRecoveryGuard.Run(args);return;}
             if (Array.IndexOf(args, "--install-driver-helper") >= 0)
             {
                 CurveEditing.FirstRunForm.InstallDriverHelper();

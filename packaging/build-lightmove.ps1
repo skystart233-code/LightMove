@@ -10,14 +10,18 @@ New-Item -ItemType Directory -Path (Split-Path $output -Parent) -Force | Out-Nul
 $stage=Join-Path $repo ('artifacts\lightmove-package\'+[guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path (Join-Path $stage 'driver') -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $app 'rawaccel.exe') -Destination (Join-Path $stage 'LightMove.exe')
+Copy-Item -LiteralPath (Join-Path $app 'LightMove.CursorGuard.exe') -Destination (Join-Path $stage 'LightMove.CursorGuard.exe')
 Copy-Item -LiteralPath (Join-Path $app 'rawaccel.exe.config') -Destination (Join-Path $stage 'LightMove.exe.config')
 foreach($name in @('wrapper.dll','Newtonsoft.Json.dll','writer.exe','installer.exe','uninstaller.exe','LICENSE')) {
     Copy-Item -LiteralPath (Join-Path $app $name) -Destination (Join-Path $stage $name)
 }
 Copy-Item -LiteralPath (Join-Path $app 'driver\rawaccel.sys') -Destination (Join-Path $stage 'driver\rawaccel.sys')
 Copy-Item -LiteralPath (Join-Path $repo 'README.zh-CN.md') -Destination (Join-Path $stage '使用说明.md')
+$notice=Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $repo 'third-party\ShakeToFindCursor\NOTICE.md')
+$license=Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $repo 'third-party\ShakeToFindCursor\LICENSE')
+($notice+"`r`n`r`n"+$license) | Set-Content -LiteralPath (Join-Path $stage '开源组件许可.txt') -Encoding UTF8
 @'
-轻移 LightMove · 0.4.0 社区预览版
+轻移 LightMove · 0.5.0 社区预览版
 基于 RawAccelOfficial/rawaccel v1.7.1，使用官方原版驱动和封装库。
 上游：https://github.com/RawAccelOfficial/rawaccel
 汉化分支：https://github.com/skystart233-code/rawaccel/tree/zh-CN

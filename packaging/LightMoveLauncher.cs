@@ -13,8 +13,8 @@ using grapher.CurveEditing;
 
 [assembly: AssemblyTitle("轻移 LightMove")]
 [assembly: AssemblyDescription("轻移中文桌面体验版启动器，基于 Raw Accel")]
-[assembly: AssemblyVersion("0.4.0.0")]
-[assembly: AssemblyFileVersion("0.4.0.0")]
+[assembly: AssemblyVersion("0.5.0.0")]
+[assembly: AssemblyFileVersion("0.5.0.0")]
 
 internal static class LightMoveLauncher
 {

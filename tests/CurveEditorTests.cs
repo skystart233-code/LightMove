@@ -32,6 +32,9 @@ internal static class CurveEditorTests
         using(var form=new CurveEditorForm(Natural(),p=>Task.FromResult(0),statePath+".chrome"))
         {
             Show(form);
+            // This check exercises window chrome, not live input. On a busy
+            // high-DPI desktop, continuous redraw ticks can starve DoEvents.
+            Field<System.Windows.Forms.Timer>(form,"liveTimer").Stop();
             CheckChromeStyle(form);
             form.Text="轻移 LightMove · 重绘验证"; form.ShowInTaskbar=true; Application.DoEvents();
             CheckChromeStyle(form);
@@ -210,7 +213,8 @@ internal static class CurveEditorTests
             Check(ReferenceSignature(canvas)!=x && canvas.AppliedPoints.All(p=>Math.Abs(p.Y-CurveProfile.Sampler(separate.argsY)(p.X))<1e-10),"Reference markers do not follow the selected axis");
         }
     }
-    private sealed class FakeStartup : IStartupRegistration { public string Command {get;set;} }
+    private sealed class FakeStartup : IStartupRegistration
+    {private string command;public int Writes;public string Command {get=>command;set {command=value;Writes++;}}}
     private sealed class FailingStore : DesktopSettingsStore
     {
         public FailingStore(string path):base(path) {}
@@ -243,10 +247,24 @@ internal static class CurveEditorTests
             Check(service.AutoStart && form.DialogResult==DialogResult.OK,"Startup settings page does not save");
         }
         using(var home=new CurveEditorForm(Natural(),p=>Task.FromResult(0),statePath+".tray"))
-        using(var session=new TraySession(home,service,false))
+        using(var session=new TraySession(home,service,false,startCursorLocator:false))
         {
             home.Opacity=0; Application.DoEvents(); var canvas=Field<CurveCanvas>(home,"canvas");
             canvas.Selected=2; canvas.ChangeSelected(12,1.4); string preview=CurveSignature(canvas);
+            var pointerSwitch=(CheckBox)home.Controls.Find("ShakeCursorSwitch",true).Single();
+            var pointerHelp=home.Controls.Find("ShakeCursorDescription",true).Single();
+            Check(pointerSwitch.Checked && pointerHelp.Text.Contains("摇晃") && pointerHelp.Text.Contains("拖拽"),"Home pointer switch or instructions are missing");
+            int startupWrites=registration.Writes;
+            pointerSwitch.GetType().GetMethod("OnClick",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(pointerSwitch,new object[]{EventArgs.Empty});
+            Check(!pointerSwitch.Checked && !service.Current.ShakeToFindCursor && CurveSignature(canvas)==preview,"Home switch does not persist independently of the curve");
+            Check(registration.Writes==startupWrites,"Home pointer switch changes startup registration");
+            var pointerMenu=Field<ToolStripMenuItem>(session,"shakeMenu");
+            Check(!pointerMenu.Checked,"Home switch does not sync tray state");
+            pointerMenu.PerformClick();
+            Check(pointerSwitch.Checked && service.Current.ShakeToFindCursor,"Tray switch does not sync home state");
+            service.SetShakeToFindCursor(false);
+            Check(!pointerSwitch.Checked && !pointerMenu.Checked,"Preference changes do not sync pointer controls");
+            service.SetShakeToFindCursor(true);CheckTextFits(home);Snapshot(home,"lightmove-pointer-switch.png");
             ((Button)home.Controls.Find("CloseWindow",true).Single()).PerformClick(); Application.DoEvents();
             Check(session.IsHidden && !home.IsDisposed,"Closing home exits instead of hiding to tray");
             session.Restore(); Application.DoEvents();
@@ -258,11 +276,19 @@ internal static class CurveEditorTests
         }
         using(var signal=new System.Threading.EventWaitHandle(false,System.Threading.EventResetMode.AutoReset))
         using(var home=new CurveEditorForm(Natural(),p=>Task.FromResult(0),statePath+".background"))
-        using(var session=new TraySession(home,service,true,signal))
+        using(var session=new TraySession(home,service,true,signal,startCursorLocator:false))
         {
             home.Opacity=0; Check(session.IsHidden && home.IsHandleCreated,"Background launch flashes or omits the home handle");
             signal.Set(); Pump(()=>home.Visible); Check(home.WindowState==FormWindowState.Normal,"Second launch signal does not restore the existing window");
             service.Save(false,new DesktopPreferences {CloseToTray=false}); home.Close(); Check(home.IsDisposed,"Disabling close-to-tray does not restore normal closing");
+        }
+        using(var home=new CurveEditorForm(Natural(),p=>Task.FromResult(0),statePath+".pointer-failure"))
+        using(var session=new TraySession(home,new DesktopSettingsService(new FailingStore(path),registration,"LightMove.exe"),false,startCursorLocator:false))
+        {
+            home.Opacity=0;var pointerSwitch=(CheckBox)home.Controls.Find("ShakeCursorSwitch",true).Single();bool beforeChecked=pointerSwitch.Checked;
+            pointerSwitch.GetType().GetMethod("OnClick",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(pointerSwitch,new object[]{EventArgs.Empty});
+            Check(pointerSwitch.Checked==beforeChecked && home.Controls.Find("ShakeCursorDescription",true).Single().Text.Contains("保存未完成"),"Failed home toggle falsely changes state or hides its error");
+            session.RequestExit();
         }
     }
     private static void ModelTests()
@@ -846,13 +872,17 @@ internal static class CurveEditorTests
                 }
             }
             statePath = Path.Combine(Environment.CurrentDirectory, "test-editor-state.json");
+            if(Array.IndexOf(args,"--native-cursor-crash-worker")>=0) {CursorLocatorTests.CrashWorker();return 0;}
+            if(Array.IndexOf(args,"--live-native-cursor")>=0) {CursorLocatorTests.LiveNative();return 0;}
+            if(Array.IndexOf(args,"--cursor-locator-only")>=0)
+            { var count=CursorLocatorTests.Run(); File.WriteAllText("curve-editor-test-result.txt","PASS: "+count+" cursor locator checks. No driver writes or injected mouse input."); return 0; }
             if(Array.IndexOf(args,"--chrome-only")>=0) { WindowChromeTests(); File.WriteAllText("chrome-result.txt","PASS: "+checks); return 0; }
             if (File.Exists(statePath)) File.Delete(statePath);
             File.WriteAllText("test-progress.txt",DateTime.UtcNow.ToString("O")+" start\n");
             Action<string,Action> run=(name,test)=>{test();File.AppendAllText("test-progress.txt",DateTime.UtcNow.ToString("O")+" "+name+"\n");};
             run("model",ModelTests);run("snap",SnapTests);run("editor",EditorTests);run("history",HistoryTests);
             run("theme",LightThemeTests);run("chrome",WindowChromeTests);run("reference",AppliedPointTests);
-            run("desktop",DesktopTests);run("comparison",ComparisonTests);run("presets",UserPresetTests);
+            run("desktop",DesktopTests);run("cursor-locator",()=>checks+=CursorLocatorTests.Run());run("comparison",ComparisonTests);run("presets",UserPresetTests);
             File.WriteAllText("curve-editor-test-result.txt", "PASS: " + checks + " checks. Native LUT parity, capped tail, maximum points, drag/add/delete, fixed view, preview-only, apply/restore callbacks, per-axis preservation, control-point reload. No live driver writes.");
             return 0;
         }

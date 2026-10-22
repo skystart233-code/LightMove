@@ -9,6 +9,7 @@ namespace grapher.Desktop
     {
         public bool StartInTray { get; set; } = true;
         public bool CloseToTray { get; set; } = true;
+        public bool ShakeToFindCursor { get; set; } = true;
     }
     public interface IStartupRegistration { string Command { get; set; } }
     public sealed class WindowsStartupRegistration : IStartupRegistration
@@ -51,6 +52,7 @@ namespace grapher.Desktop
         private readonly IStartupRegistration startup;
         private readonly string executable;
         public DesktopPreferences Current { get; private set; }
+        public event EventHandler Changed;
         public bool AutoStart => !string.IsNullOrWhiteSpace(startup.Command);
         public DesktopSettingsService(DesktopSettingsStore store,IStartupRegistration startup,string executable)
         { this.store=store; this.startup=startup; this.executable=executable; Current=store.Load(); }
@@ -74,6 +76,12 @@ namespace grapher.Desktop
                 catch(Exception rollback) { throw new InvalidOperationException("设置保存失败，开机启动也未能恢复，请重新检查启动设置。",new AggregateException(error,rollback)); }
                 throw;
             }
+            Changed?.Invoke(this,EventArgs.Empty);
+        }
+        public void SetShakeToFindCursor(bool enabled)
+        {
+            var next=new DesktopPreferences {StartInTray=Current.StartInTray,CloseToTray=Current.CloseToTray,ShakeToFindCursor=enabled};
+            store.Save(next);Current=next;Changed?.Invoke(this,EventArgs.Empty);
         }
     }
 }

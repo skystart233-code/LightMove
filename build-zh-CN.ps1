@@ -68,5 +68,6 @@ $responseFile = Join-Path $buildPath 'compile.rsp'
 $arguments | Set-Content -LiteralPath $responseFile -Encoding UTF8
 & dotnet $compiler /noconfig ('@' + $responseFile)
 if ($LASTEXITCODE -ne 0) { throw 'Chinese GUI compilation failed.' }
+Copy-Item -LiteralPath (Join-Path $outputPath 'rawaccel.exe') -Destination (Join-Path $outputPath 'LightMove.CursorGuard.exe') -Force
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'grapher\App.config') -Destination (Join-Path $outputPath 'rawaccel.exe.config') -Force
 Write-Output "Chinese GUI built: $outputPath"
