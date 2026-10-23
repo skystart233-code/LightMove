@@ -1,6 +1,7 @@
 {
   "name": "LightMove",
   "displayName": "轻移 LightMove",
+  "repository": "skystart233-code/LightMove",
   "version": "0.5.0-preview",
   "tagline": "线性手感，稳、准、快。",
   "platform": "Windows 10/11 x64",

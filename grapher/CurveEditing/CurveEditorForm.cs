@@ -240,7 +240,7 @@ namespace grapher.CurveEditing
             buttons.Controls.AddRange(new Control[] { apply, close, reset, restore }); footer.Controls.Add(buttons,1,0); Controls.Add(footer);
             var about = ButtonFor("关于", 80); about.BackColor = LightTheme.Page; about.ForeColor = LightTheme.Secondary;
             about.Click += (s, e) => MessageBox.Show(this,
-                "轻移 LightMove · 社区预览版\n线性手感，稳、准、快。\n\n为减少反复挪动鼠标、兼顾精细定位而设计。\n基于 Raw Accel v1.7.1，保留其官方驱动与 MIT 许可证。\n\n上游：github.com/RawAccelOfficial/rawaccel\n项目：github.com/skystart233-code/rawaccel\n\n软件调整操作手感，不提供健康效果承诺。", "关于轻移", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "轻移 LightMove · 社区预览版\n线性手感，稳、准、快。\n\n为减少反复挪动鼠标、兼顾精细定位而设计。\n基于 Raw Accel v1.7.1，保留其官方驱动与 MIT 许可证。\n\n上游：github.com/RawAccelOfficial/rawaccel\n项目：github.com/skystart233-code/LightMove（独立仓库，基于上游）\n\n软件调整操作手感，不提供健康效果承诺。", "关于轻移", MessageBoxButtons.OK, MessageBoxIcon.Information);
             about.Anchor = AnchorStyles.Left; about.Margin = Padding.Empty; footer.Controls.Add(about,0,0);
             CancelButton = close;
 

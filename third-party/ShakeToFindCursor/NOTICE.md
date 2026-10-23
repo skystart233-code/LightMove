@@ -9,4 +9,4 @@
 - Recovery: original cursors are copied before each effect. Restore after 220 ms without a fresh shake reversal, when dragging starts, on disable, or on exit. `LightMove.CursorGuard.exe` keeps independent original copies and restores them if the owner exits or stops sending a heartbeat for 600 ms. This helper uses the same compiled application with a dedicated entry point; it has no driver, input-hook or network functionality.
 - Scope: ordinary interactive Windows desktop. Secure desktops, exclusive fullscreen applications and application-owned cursor images may not enlarge. Busy animations can appear static briefly while enlarged; stopping restores the saved native cursors.
 
-The distributed EXE includes the upstream MIT text and this attribution in `开源组件许可.txt`.
+The distributed EXE includes the upstream MIT text and this attribution in `开源组件许可.txt`. See [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md) for all third-party components and distribution requirements. The existing 0.5.0-preview EXE includes this ShakeToFindCursor text; Newtonsoft.Json's full license is supplied by the release companion license ZIP.

@@ -2,10 +2,11 @@ name: Windows build and checks
 on:
   workflow_dispatch:
   push:
-    branches: [zh-CN]
-    paths: ['grapher/**', 'tests/**', 'scripts/**', 'packaging/**', 'build-zh-CN.ps1', 'project.json', '.github/workflows/**']
+    branches: [main]
+    paths: ['grapher/**', 'tests/**', 'scripts/**', 'packaging/**', 'third-party/**', 'build-zh-CN.ps1', 'project.json', 'LICENSE', 'THIRD_PARTY_NOTICES.md', '.github/workflows/**']
   pull_request:
-    paths: ['grapher/**', 'tests/**', 'scripts/**', 'packaging/**', 'build-zh-CN.ps1', 'project.json', '.github/workflows/**']
+    branches: [main]
+    paths: ['grapher/**', 'tests/**', 'scripts/**', 'packaging/**', 'third-party/**', 'build-zh-CN.ps1', 'project.json', 'LICENSE', 'THIRD_PARTY_NOTICES.md', '.github/workflows/**']
 permissions:
   contents: read
 jobs:

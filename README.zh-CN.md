@@ -6,7 +6,9 @@
 
 轻移提供极简白色中文首页、现代窗口按钮、实时红点和可拖动曲线。使用指南可展开，常用调节集中在一页。当前为社区预览版，功能与兼容性持续完善。
 
-基于 [RawAccelOfficial/rawaccel v1.7.1](https://github.com/RawAccelOfficial/rawaccel/releases/tag/v1.7.1) 的非官方界面汉化，维护于 `zh-CN` 分支。保留原项目 MIT 许可证和作者署名。
+本仓库是 LightMove 的独立维护仓库 [skystart233-code/LightMove](https://github.com/skystart233-code/LightMove)，默认分支为 `main`。迁移完成后，历史仓库 [skystart233-code/rawaccel](https://github.com/skystart233-code/rawaccel) 保留为公开存档。
+
+项目基于 [RawAccelOfficial/rawaccel v1.7.1](https://github.com/RawAccelOfficial/rawaccel/releases/tag/v1.7.1) 的非官方界面汉化与桌面扩展。Raw Accel 的驱动、封装库与算法版权归上游作者；轻移的界面与桌面交互为社区修改，不代表全部原创，也不是 Raw Accel 官方发行版。保留上游 MIT 许可证和作者署名。
 
 汉化范围：主窗口、菜单、八种曲线名称、参数标签、图表标题/图例、设备窗口、关于窗口、查找表校验提示、常见的未安装驱动提示。曲线保留英文名称便于对照官方文档。底层库返回的部分诊断文字、官方安装器及卸载器保留原文。
 
@@ -32,7 +34,7 @@
 
 按住鼠标键拖拽、选择文字或调节曲线时暂停放大；收进系统托盘后继续可用，与轻移手感大开关相互独立。无需新增驱动或管理员权限，不改变 DPI、加速曲线或系统指针方案。
 
-摇晃识别及原生指针替换 / 恢复适配自 MIT 项目 [0cch/ShakeToFindCursor](https://github.com/0cch/ShakeToFindCursor)，署名和许可随 EXE 附带。放大前复制原指针，停止、拖拽、关闭功能或退出时恢复；独立恢复助手防止主进程异常退出或卡住后一直保留大指针。不写入指针方案注册表。安全桌面、独占全屏及应用自己绘制的指针可能不放大；等待动画放大期间可能短暂静止。
+摇晃识别及原生指针替换 / 恢复适配自 MIT 项目 [0cch/ShakeToFindCursor](https://github.com/0cch/ShakeToFindCursor)，署名和许可随 EXE 附带。完整第三方许可汇总见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。放大前复制原指针，停止、拖拽、关闭功能或退出时恢复；独立恢复助手防止主进程异常退出或卡住后一直保留大指针。不写入指针方案注册表。安全桌面、独占全屏及应用自己绘制的指针可能不放大；等待动画放大期间可能短暂静止。
 
 ## 点一下，对比开启前后
 
@@ -106,7 +108,7 @@
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\build-zh-CN.ps1 -OfficialDirectory C:\path\to\RawAccel
 ```
 
-默认输出到 `artifacts\RawAccel-zh-CN`，包含官方依赖和英文原版备份。该脚本不会安装驱动或修改系统鼠标设置。中文界面属于本分支自行编译的非官方程序，不应冒充官方签名版本。
+默认输出到 `artifacts\RawAccel-zh-CN`，包含官方依赖和英文原版备份。该脚本不会安装驱动或修改系统鼠标设置。中文界面属于本项目自行编译的非官方程序，不应冒充官方签名版本。
 
 ## 验证范围
 
@@ -121,3 +123,19 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\run-curve-editor
 ```
 
 默认测试使用模拟的应用回调，不向实际驱动写入设置。测试中保留了供维护者显式调用的 `--live-no-change` 分支，用同一份已生效配置验证真实驱动写入与回读。
+
+## 仓库、来源与许可
+
+本次仓库迁移保留 `v0.5.0-preview` 版本号和原已验证 EXE 的字节内容；没有重新编译二进制，软件功能与算法未改变。迁移完成后，历史仓库 [skystart233-code/rawaccel](https://github.com/skystart233-code/rawaccel) 保留为公开存档。
+
+轻移基于 [Raw Accel v1.7.1](https://github.com/RawAccelOfficial/rawaccel/releases/tag/v1.7.1)。Raw Accel 的驱动、封装库与算法来自上游；轻移的中文界面、曲线工作台、托盘与摇晃查找指针等桌面交互为社区扩展，不代表全部原创，也不是 Raw Accel 官方发行版。
+
+第三方组件：
+
+- **Raw Accel v1.7.1** — MIT，Copyright (c) 2020 a1xd；完整文本见 [LICENSE](LICENSE)。
+- **ShakeToFindCursor** — MIT，Copyright (c) 2024 0CCh；完整文本见 [third-party/ShakeToFindCursor/LICENSE](third-party/ShakeToFindCursor/LICENSE)，来源与改动见 [NOTICE](third-party/ShakeToFindCursor/NOTICE.md)。
+- **Newtonsoft.Json 13.0.1** — MIT，Copyright (c) 2007 James Newton-King；完整文本见 [third-party/Newtonsoft.Json/LICENSE.md](third-party/Newtonsoft.Json/LICENSE.md)，来源见 [NOTICE](third-party/Newtonsoft.Json/NOTICE.md)。
+
+汇总与分发要求见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。发布或再分发时必须随附以上三份完整许可。现有 0.5.0-preview EXE 内置 Raw Accel 与 ShakeToFindCursor 许可文本，但未内嵌 Newtonsoft.Json 13.0.1 的完整 MIT 文本；发布附件中的配套许可 ZIP 补齐该许可，不能表述为 EXE 内已包含。
+
+MIT License · Copyright (c) 2020 a1xd。详见 [LICENSE](LICENSE)。

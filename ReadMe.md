@@ -4,7 +4,8 @@
 <p align="center"><strong>少挪手腕，稳准到位。</strong></p>
 <p align="center">适用于 Windows 的鼠标手感调节工具</p>
 <p align="center">Windows 10 / 11 · x64 · 0.5.0 社区预览版</p>
-<p align="center"><a href="https://github.com/skystart233-code/rawaccel/releases">下载</a> · <a href="README.zh-CN.md">使用指南</a> · <a href="CHANGELOG.md">更新记录</a> · <a href="https://github.com/skystart233-code/rawaccel/issues">问题反馈</a></p>
+<p align="center">独立维护仓库 · 基于 <a href="https://github.com/RawAccelOfficial/rawaccel/releases/tag/v1.7.1">Raw Accel v1.7.1</a> · 非官方发行版</p>
+<p align="center"><a href="https://github.com/skystart233-code/LightMove/releases">下载</a> · <a href="README.zh-CN.md">使用指南</a> · <a href="CHANGELOG.md">更新记录</a> · <a href="https://github.com/skystart233-code/LightMove/issues">问题反馈</a></p>
 
 轻移以**减少手腕反复挪动**为设计目标。灵感来自轨迹球，将普通鼠标熟悉的指向操作与小幅动作跨屏的思路相结合：慢速移动时保留精细定位，较快移动时扩大光标行程。
 
@@ -24,7 +25,7 @@
 
 ## 快速开始
 
-1. 从 [Releases](https://github.com/skystart233-code/rawaccel/releases) 下载 Windows x64 EXE，双击运行。
+1. 从 [Releases](https://github.com/skystart233-code/LightMove/releases) 下载 Windows x64 EXE，双击运行。
 2. 首次使用按引导安装官方驱动，保存工作后重启一次。驱动已就绪时可直接使用。
 3. 选择预设，移动鼠标观察实时红点，拖动蓝色控制点调整曲线。
 4. 点击 **应用曲线** 保存并生效。
@@ -108,14 +109,18 @@
 - [更新记录](CHANGELOG.md)：版本功能与变更。
 - [开发指南](docs/DEVELOPMENT.md)：项目结构、构建与测试。
 - [架构说明](docs/ARCHITECTURE.md)：输入、配置及桌面生命周期。
-- [问题反馈](https://github.com/skystart233-code/rawaccel/issues)：提交系统环境、软件版本、复现步骤与截图。
+- [问题反馈](https://github.com/skystart233-code/LightMove/issues)：提交系统环境、软件版本、复现步骤与截图。
 - [参与贡献](CONTRIBUTING.md)：开发约定与贡献方式。
 
 ## 项目来源与许可
 
-轻移基于 [Raw Accel v1.7.1](https://github.com/RawAccelOfficial/rawaccel/releases/tag/v1.7.1) 扩展中文界面与桌面交互，保留其官方驱动及封装库。感谢 Raw Accel 作者与贡献者。
+本仓库是 LightMove 的独立维护仓库 [skystart233-code/LightMove](https://github.com/skystart233-code/LightMove)，默认分支为 `main`。迁移完成后，历史仓库 [skystart233-code/rawaccel](https://github.com/skystart233-code/rawaccel) 保留为公开存档，历史版本与发布资产仍可查阅；最新源码、问题反馈和发布以本仓库为准。
+
+轻移基于 [Raw Accel v1.7.1](https://github.com/RawAccelOfficial/rawaccel/releases/tag/v1.7.1) 扩展中文界面与桌面交互，保留其官方驱动及封装库。Raw Accel 的驱动、封装库与算法版权归上游作者；轻移的界面与桌面交互为社区修改，不代表全部原创，也不是 Raw Accel 官方发行版。感谢 Raw Accel 作者与贡献者。
 
 摇晃查找指针适配自 MIT 项目 [0cch/ShakeToFindCursor](https://github.com/0cch/ShakeToFindCursor)。感谢 0CCh；[来源、改动与许可](third-party/ShakeToFindCursor/NOTICE.md)随软件附带。
+
+第三方组件与完整许可汇总见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)：Raw Accel v1.7.1、ShakeToFindCursor 与 Newtonsoft.Json 13.0.1，均为 MIT 许可。发布或再分发时必须随附三份完整许可。现有 0.5.0-preview EXE 内置 Raw Accel 与 ShakeToFindCursor 许可文本，但未内嵌 Newtonsoft.Json 13.0.1 的完整 MIT 文本；发布附件中的配套许可 ZIP 补齐该文件，不能表述为 EXE 内已包含。
 
 “线性手感”描述平顺、可控的操作体验。软件通过可自定义的速度曲线调整光标倍率，不改写硬件 DPI；也支持将曲线拉平，提供固定倍率。减少手腕反复移动是设计目标，实际舒适度因设备与使用习惯而异，尚无医疗功效验证。
 

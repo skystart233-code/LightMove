@@ -13,6 +13,7 @@
 | `doc/assets/` | 图标、界面图和明确标注的模拟演示 |
 | `docs/` | 项目开发、架构、发布及来源说明 |
 | `third-party/` | 复用组件的固定来源版本、改动说明及完整许可 |
+| `THIRD_PARTY_NOTICES.md` | 第三方组件清单、许可与分发要求 |
 | `.github/workflows/` | Windows 构建检查；不自动公开发布 |
 | `artifacts/` | 忽略版本控制的构建输出 |
 | `driver/`、`wrapper/`、`installer/` 等 | 上游原有源码，保留相对路径 |
@@ -26,6 +27,8 @@ $official = & .\scripts\get-official.ps1
 ```
 
 也可将已解压的官方目录直接传入。生成文件位于 `artifacts/LightMove/`。底层驱动版本与官方封装兼容检测保持上游 v1.7.1；桌面包版本独立记录在 `project.json`。
+
+新增或升级第三方组件时，必须更新 `THIRD_PARTY_NOTICES.md`、`third-party/` 下的来源与完整许可，并确认 `packaging/build-lightmove.ps1` 会把全部许可带入发行包。发行包缺少任一许可时不得发布。
 
 ## 运行
 

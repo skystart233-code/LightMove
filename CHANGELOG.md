@@ -1,5 +1,7 @@
 # 更新记录
 
+> **仓库迁移（2026-10-23）**：项目迁移至独立仓库 [skystart233-code/LightMove](https://github.com/skystart233-code/LightMove)，保留 `v0.5.0-preview` 版本号与已验证 EXE 的字节内容。本次不重编译二进制、不改变功能；补齐 Newtonsoft.Json 13.0.1 的完整 MIT 许可与 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)，并更新仓库链接、issue 模板与发布说明。迁移完成后，历史仓库 [skystart233-code/rawaccel](https://github.com/skystart233-code/rawaccel) 保留为公开存档。
+
 ## 0.5.0-preview · 2026-10-22
 
 - 新增「摇晃鼠标，放大指针」：快速来回摇晃，指针平滑放大至约 3 倍，停下后自动缩回。
